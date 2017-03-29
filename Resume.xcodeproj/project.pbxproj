@@ -14,6 +14,7 @@
 		FA3CC77F1E8C65B3002CE7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC77E1E8C65B3002CE7B3 /* Assets.xcassets */; };
 		FA3CC7821E8C65B3002CE7B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC7801E8C65B3002CE7B3 /* LaunchScreen.storyboard */; };
 		FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */; };
+		FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FA3CC7811E8C65B3002CE7B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA3CC7831E8C65B3002CE7B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		FAE2C61A1E8C68ED006FE6C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */,
 				FA3CC77A1E8C65B3002CE7B3 /* ViewController.swift in Sources */,
 				FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */,
 				FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */,
