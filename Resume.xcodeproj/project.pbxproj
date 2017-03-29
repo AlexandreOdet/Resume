@@ -13,6 +13,7 @@
 		FA3CC77D1E8C65B3002CE7B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC77B1E8C65B3002CE7B3 /* Main.storyboard */; };
 		FA3CC77F1E8C65B3002CE7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC77E1E8C65B3002CE7B3 /* Assets.xcassets */; };
 		FA3CC7821E8C65B3002CE7B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC7801E8C65B3002CE7B3 /* LaunchScreen.storyboard */; };
+		FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FA3CC77E1E8C65B3002CE7B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA3CC7811E8C65B3002CE7B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA3CC7831E8C65B3002CE7B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,9 @@
 		FA3CC7761E8C65B3002CE7B3 /* Resume */ = {
 			isa = PBXGroup;
 			children = (
+				FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */,
+				FAE2C61A1E8C68ED006FE6C3 /* Extensions */,
+				FAE2C6181E8C67BB006FE6C3 /* Models */,
 				FA3CC7771E8C65B3002CE7B3 /* AppDelegate.swift */,
 				FA3CC7791E8C65B3002CE7B3 /* ViewController.swift */,
 				FA3CC77B1E8C65B3002CE7B3 /* Main.storyboard */,
@@ -88,6 +93,20 @@
 			path = Resume;
 			sourceTree = "<group>";
 		};
+		FAE2C6181E8C67BB006FE6C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		FAE2C61A1E8C68ED006FE6C3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -96,6 +115,7 @@
 			buildConfigurationList = FA3CC7861E8C65B3002CE7B3 /* Build configuration list for PBXNativeTarget "Resume" */;
 			buildPhases = (
 				2DC0A271FFF1C837195A25EB /* [CP] Check Pods Manifest.lock */,
+				FAE2C61B1E8C69A2006FE6C3 /* ShellScript */,
 				FA3CC7701E8C65B3002CE7B3 /* Sources */,
 				FA3CC7711E8C65B3002CE7B3 /* Frameworks */,
 				FA3CC7721E8C65B3002CE7B3 /* Resources */,
@@ -205,6 +225,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Resume/Pods-Resume-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FAE2C61B1E8C69A2006FE6C3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -214,6 +247,7 @@
 			files = (
 				FA3CC77A1E8C65B3002CE7B3 /* ViewController.swift in Sources */,
 				FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */,
+				FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +413,7 @@
 				FA3CC7881E8C65B3002CE7B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
