@@ -31,14 +31,35 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 1 images.
+  /// This `R.image` struct is generated, and contains static references to 4 images.
   struct image {
     /// Image `profile`.
     static let profile = Rswift.ImageResource(bundle: R.hostingBundle, name: "profile")
+    /// Image `project`.
+    static let project = Rswift.ImageResource(bundle: R.hostingBundle, name: "project")
+    /// Image `skills`.
+    static let skills = Rswift.ImageResource(bundle: R.hostingBundle, name: "skills")
+    /// Image `wallpaper`.
+    static let wallpaper = Rswift.ImageResource(bundle: R.hostingBundle, name: "wallpaper")
     
     /// `UIImage(named: "profile", bundle: ..., traitCollection: ...)`
     static func profile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.profile, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "project", bundle: ..., traitCollection: ...)`
+    static func project(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.project, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "skills", bundle: ..., traitCollection: ...)`
+    static func skills(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.skills, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "wallpaper", bundle: ..., traitCollection: ...)`
+    static func wallpaper(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.wallpaper, compatibleWith: traitCollection)
     }
     
     fileprivate init() {}
@@ -113,7 +134,7 @@ struct _R {
     }
     
     struct main: Rswift.StoryboardResourceWithInitialControllerType {
-      typealias InitialController = ViewController
+      typealias InitialController = HomeViewController
       
       let bundle = R.hostingBundle
       let name = "Main"
