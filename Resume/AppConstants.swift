@@ -10,6 +10,6 @@ import Foundation
 
 class AppConstant {
   class network {
-    
+    static let url = PlistUtils.getGithubUrl()
   }
 }

@@ -20,6 +20,7 @@
 		FACB637C1E95C57800EEBB02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB637B1E95C57800EEBB02 /* ViewController.swift */; };
 		FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */; };
 		FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */; };
+		FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		FACB637B1E95C57800EEBB02 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
 		FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
+		FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubAPICommunication.swift; path = Network/GithubAPICommunication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		FA3CC7761E8C65B3002CE7B3 /* Resume */ = {
 			isa = PBXGroup;
 			children = (
+				FAFBC2DD1E9861FB009D1F9D /* Network */,
 				FA4A81101E969B17000E3AFA /* Utils */,
 				FACB63781E95C54A00EEBB02 /* Controllers */,
 				FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */,
@@ -139,6 +142,14 @@
 				FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		FAFBC2DD1E9861FB009D1F9D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +295,7 @@
 				FACB637C1E95C57800EEBB02 /* ViewController.swift in Sources */,
 				FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */,
 				FACB63771E95C3A500EEBB02 /* GithubProject.swift in Sources */,
+				FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */,
 				FACB637A1E95C56400EEBB02 /* GithubProjectsListTableViewController.swift in Sources */,
 				FA4A810F1E969A6C000E3AFA /* AppConstants.swift in Sources */,
 				FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */,

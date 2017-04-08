@@ -5,6 +5,9 @@ PODS:
     - PromiseKit/Foundation (= 4.1.7)
     - PromiseKit/QuartzCore (= 4.1.7)
     - PromiseKit/UIKit (= 4.1.7)
+  - PromiseKit/Alamofire (4.1.7):
+    - Alamofire (~> 4.0)
+    - PromiseKit/CorePromise
   - PromiseKit/CorePromise (4.1.7)
   - PromiseKit/Foundation (4.1.7):
     - PromiseKit/CorePromise
@@ -21,6 +24,7 @@ DEPENDENCIES:
   - Alamofire
   - ObjectMapper
   - PromiseKit
+  - PromiseKit/Alamofire
   - R.swift
   - SnapKit
 
@@ -32,6 +36,6 @@ SPEC CHECKSUMS:
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
 
-PODFILE CHECKSUM: 22f276b72a59cf798687339c210e85528ad27f49
+PODFILE CHECKSUM: f40c754bbd4f4ea51c0302a76360f8e8d3249234
 
 COCOAPODS: 1.2.0

@@ -9,7 +9,16 @@
 import Foundation
 import ObjectMapper
 
-class GithubProject {
+class GithubProject: Mappable {
   var projectName = ""
-  var langage = ""
+  var description = ""
+  var language = ""
+  
+  required init?(map: Map) {}
+  
+  func mapping(map: Map) {
+    self.projectName <- map["name"]
+    self.description <- map["description"]
+    self.language <- map["language"]
+  }
 }
