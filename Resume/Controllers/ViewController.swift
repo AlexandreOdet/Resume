@@ -62,6 +62,8 @@ class HomeViewController: UIViewController {
   }
   
   func projectsButtonTarget() {
+    let nextViewController = GithubProjectListTableViewController()
+    self.navigationController?.pushViewController(nextViewController, animated: true)
     print("Projects Button tapped")
   }
   

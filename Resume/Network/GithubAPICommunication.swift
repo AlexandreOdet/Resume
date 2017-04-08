@@ -9,18 +9,20 @@
 import Foundation
 import Alamofire
 import PromiseKit
+import AlamofireObjectMapper
 
 class GithubAPICommunication {
   static func fetchProjects() -> Promise<[GithubProject]> {
-    let q = DispatchQueue.global()
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    return Promise<[GithubProject]> {_,_ in firstly { _ in
-      Alamofire.request(AppConstant.network.url!, method: .get).responseData()
-      }.then(on: q) { data in
-        print("\(data)")
-      }.always {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-      }
+    return Promise { (fulfill, reject) in
+      Alamofire.request(AppConstant.network.url!).responseArray(completionHandler: {
+        (response: DataResponse<[GithubProject]>) in
+        switch response.result {
+        case .success(let array):
+          fulfill(array)
+        case .failure(let error):
+          reject(error)
+        }
+      })
     }
   }
 }

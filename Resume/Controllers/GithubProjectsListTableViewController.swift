@@ -19,6 +19,7 @@ class GithubProjectListTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    fillArray()
   }
   
   override func numberOfSections(in tableView: UITableView) -> Int {
@@ -30,6 +31,17 @@ class GithubProjectListTableViewController: UITableViewController {
   }
   
   private func fillArray() {
-  
+    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    firstly {
+      GithubAPICommunication.fetchProjects()
+      }.then { array -> Void in
+        self.projects.append(contentsOf: array)
+      }.always {
+       UIApplication.shared.isNetworkActivityIndicatorVisible = false
+      }.catch { _ in
+        let alertError = UIAlertController(title: "Erreur", message: "Erreur lors de la récupération des données", preferredStyle: .alert)
+        alertError.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertError, animated: true, completion: nil)
+    }
   }
 }

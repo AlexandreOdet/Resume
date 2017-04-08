@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>AlamofireObjectMapper.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -44,7 +49,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1DFC93CF727A8DAE61FD93F99EDAAFB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2F5622F3B18DF497981AB58C6D1FC72F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>72CCA191C2B58346C349329F87C1A16B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7C87D8780722ADED2B297AFCCDF55AD4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -59,7 +79,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>91732F405E04ED497C2F16C5A68ACE35</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9502FB01641FBABB78522037E882757B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B43918AB915242B851ABEFB5D70BE0AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EABBE37485205FEF97F7D7876C768AE3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

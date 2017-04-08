@@ -10,6 +10,7 @@ target 'Resume' do
   pod 'R.swift'
   pod 'PromiseKit'
   pod 'PromiseKit/Alamofire'
+  pod 'AlamofireObjectMapper'
   # Pods for Resume
 
 end
