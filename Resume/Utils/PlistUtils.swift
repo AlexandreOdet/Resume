@@ -16,4 +16,13 @@ class PlistUtils {
     }
     return (dict.object(forKey: "github_url") as? String)
   }
+  
+  static func getWebsiteUrl() -> String? {
+    let path = Bundle.main.path(forResource: "Network", ofType: "plist")
+    guard let dict = NSDictionary(contentsOfFile: path!) else {
+      return nil
+    }
+    return (dict.object(forKey: "website_url") as? String)
+  }
+  
 }

@@ -10,6 +10,8 @@ import Foundation
 
 class AppConstant {
   class network {
-    static let url = PlistUtils.getGithubUrl()
+    static let githubUrl = PlistUtils.getGithubUrl()
+    static let websiteUrl = PlistUtils.getWebsiteUrl()
+    static let jsonExtension = ".json"
   }
 }

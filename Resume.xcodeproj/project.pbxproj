@@ -16,6 +16,10 @@
 		FA4A81121E969B3A000E3AFA /* PlistUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4A81111E969B3A000E3AFA /* PlistUtils.swift */; };
 		FA4A81141E969E66000E3AFA /* Network.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA4A81131E969E66000E3AFA /* Network.plist */; };
 		FA621A861EA28E22004FB8D5 /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA621A851EA28E22004FB8D5 /* SortType.swift */; };
+		FA6BC13A1EA2A51300AF3432 /* HTTPRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */; };
+		FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13B1EA2A9C400AF3432 /* WebsiteAPICommunication.swift */; };
+		FA6BC13E1EA2AA5A00AF3432 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */; };
+		FA6BC1401EA2B10A00AF3432 /* SkillsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13F1EA2B10A00AF3432 /* SkillsCollectionViewController.swift */; };
 		FACB63771E95C3A500EEBB02 /* GithubProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB63761E95C3A500EEBB02 /* GithubProject.swift */; };
 		FACB637A1E95C56400EEBB02 /* GithubProjectsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB63791E95C56400EEBB02 /* GithubProjectsListTableViewController.swift */; };
 		FACB637C1E95C57800EEBB02 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB637B1E95C57800EEBB02 /* HomeViewController.swift */; };
@@ -38,6 +42,10 @@
 		FA4A81111E969B3A000E3AFA /* PlistUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlistUtils.swift; path = Utils/PlistUtils.swift; sourceTree = "<group>"; };
 		FA4A81131E969E66000E3AFA /* Network.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Network.plist; sourceTree = "<group>"; };
 		FA621A851EA28E22004FB8D5 /* SortType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortType.swift; path = Enums/SortType.swift; sourceTree = "<group>"; };
+		FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPRouter.swift; path = Enums/HTTPRouter.swift; sourceTree = "<group>"; };
+		FA6BC13B1EA2A9C400AF3432 /* WebsiteAPICommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebsiteAPICommunication.swift; path = Network/WebsiteAPICommunication.swift; sourceTree = "<group>"; };
+		FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Skill.swift; path = Models/Skill.swift; sourceTree = "<group>"; };
+		FA6BC13F1EA2B10A00AF3432 /* SkillsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillsCollectionViewController.swift; path = Controllers/SkillsCollectionViewController.swift; sourceTree = "<group>"; };
 		FACB63761E95C3A500EEBB02 /* GithubProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProject.swift; path = Models/GithubProject.swift; sourceTree = "<group>"; };
 		FACB63791E95C56400EEBB02 /* GithubProjectsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProjectsListTableViewController.swift; path = Controllers/GithubProjectsListTableViewController.swift; sourceTree = "<group>"; };
 		FACB637B1E95C57800EEBB02 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/HomeViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				FA621A851EA28E22004FB8D5 /* SortType.swift */,
+				FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -135,6 +144,7 @@
 			children = (
 				FACB63791E95C56400EEBB02 /* GithubProjectsListTableViewController.swift */,
 				FACB637B1E95C57800EEBB02 /* HomeViewController.swift */,
+				FA6BC13F1EA2B10A00AF3432 /* SkillsCollectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -143,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				FACB63761E95C3A500EEBB02 /* GithubProject.swift */,
+				FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -159,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */,
+				FA6BC13B1EA2A9C400AF3432 /* WebsiteAPICommunication.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -303,15 +315,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4A81121E969B3A000E3AFA /* PlistUtils.swift in Sources */,
+				FA6BC13E1EA2AA5A00AF3432 /* Skill.swift in Sources */,
 				FACB637C1E95C57800EEBB02 /* HomeViewController.swift in Sources */,
 				FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */,
+				FA6BC1401EA2B10A00AF3432 /* SkillsCollectionViewController.swift in Sources */,
 				FA621A861EA28E22004FB8D5 /* SortType.swift in Sources */,
 				FACB63771E95C3A500EEBB02 /* GithubProject.swift in Sources */,
 				FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */,
 				FACB637A1E95C56400EEBB02 /* GithubProjectsListTableViewController.swift in Sources */,
 				FA4A810F1E969A6C000E3AFA /* AppConstants.swift in Sources */,
 				FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */,
+				FA6BC13A1EA2A51300AF3432 /* HTTPRouter.swift in Sources */,
 				FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */,
+				FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

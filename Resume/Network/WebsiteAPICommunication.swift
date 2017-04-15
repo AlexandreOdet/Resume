@@ -1,8 +1,8 @@
 //
-//  GithubAPICommunication.swift
+//  WebsiteAPICommunication.swift
 //  Resume
 //
-//  Created by Odet Alexandre on 07/04/2017.
+//  Created by Odet Alexandre on 15/04/2017.
 //  Copyright © 2017 Odet Alexandre. All rights reserved.
 //
 
@@ -11,11 +11,12 @@ import Alamofire
 import PromiseKit
 import AlamofireObjectMapper
 
-class GithubAPICommunication {
-  static func fetchProjects() -> Promise<[GithubProject]> {
+class WebsiteAPICommunication {
+  
+  func fetchSkills() -> Promise<[Skill]> {
     return Promise { (fulfill, reject) in
-      Alamofire.request(AppConstant.network.githubUrl!).responseArray(completionHandler: {
-        (response: DataResponse<[GithubProject]>) in
+      Alamofire.request(HTTPRouter.skills.url, method: .get).responseArray(completionHandler: {
+        (response: DataResponse<[Skill]>) in
         switch response.result {
         case .success(let array):
           fulfill(array)
@@ -25,4 +26,5 @@ class GithubAPICommunication {
       })
     }
   }
+  
 }

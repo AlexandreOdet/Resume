@@ -23,6 +23,7 @@ class GithubProjectListTableViewController: UITableViewController {
     self.tableView = UITableView(frame: self.view.frame, style: .grouped)
     self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     self.title = "Mes projets"
+    tableView.isUserInteractionEnabled = false
     fetchDataFromGithub()
   }
   

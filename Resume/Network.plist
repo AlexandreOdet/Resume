@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>website_url</key>
+	<string>https://alexandreodet.herokuapp.com</string>
 	<key>github_url</key>
 	<string>https://api.github.com/users/MaddDogg0001/repos</string>
 </dict>
