@@ -40,8 +40,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 4 images.
+  /// This `R.image` struct is generated, and contains static references to 5 images.
   struct image {
+    /// Image `order`.
+    static let order = Rswift.ImageResource(bundle: R.hostingBundle, name: "order")
     /// Image `profile`.
     static let profile = Rswift.ImageResource(bundle: R.hostingBundle, name: "profile")
     /// Image `project`.
@@ -50,6 +52,11 @@ struct R: Rswift.Validatable {
     static let skills = Rswift.ImageResource(bundle: R.hostingBundle, name: "skills")
     /// Image `wallpaper`.
     static let wallpaper = Rswift.ImageResource(bundle: R.hostingBundle, name: "wallpaper")
+    
+    /// `UIImage(named: "order", bundle: ..., traitCollection: ...)`
+    static func order(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.order, compatibleWith: traitCollection)
+    }
     
     /// `UIImage(named: "profile", bundle: ..., traitCollection: ...)`
     static func profile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
