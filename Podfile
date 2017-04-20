@@ -11,6 +11,6 @@ target 'Resume' do
   pod 'PromiseKit'
   pod 'PromiseKit/Alamofire'
   pod 'AlamofireObjectMapper'
-  # Pods for Resume
+pod 'CircleProgressBar', '~> 0.32’  # Pods for Resume
 
 end

@@ -19,10 +19,11 @@
 		FA6BC13A1EA2A51300AF3432 /* HTTPRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */; };
 		FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13B1EA2A9C400AF3432 /* WebsiteAPICommunication.swift */; };
 		FA6BC13E1EA2AA5A00AF3432 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */; };
-		FA6BC1401EA2B10A00AF3432 /* SkillsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13F1EA2B10A00AF3432 /* SkillsCollectionViewController.swift */; };
 		FACB63771E95C3A500EEBB02 /* GithubProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB63761E95C3A500EEBB02 /* GithubProject.swift */; };
-		FACB637A1E95C56400EEBB02 /* GithubProjectsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB63791E95C56400EEBB02 /* GithubProjectsListTableViewController.swift */; };
 		FACB637C1E95C57800EEBB02 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB637B1E95C57800EEBB02 /* HomeViewController.swift */; };
+		FAE00A3D1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE00A3C1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift */; };
+		FAE00A3F1EA8565800C121C1 /* SkillsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE00A3E1EA8565800C121C1 /* SkillsCollectionViewController.swift */; };
+		FAE00A441EA8569500C121C1 /* GithubProjectListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE00A431EA8569500C121C1 /* GithubProjectListTableViewCell.swift */; };
 		FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */; };
 		FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */; };
 		FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */; };
@@ -45,10 +46,11 @@
 		FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPRouter.swift; path = Enums/HTTPRouter.swift; sourceTree = "<group>"; };
 		FA6BC13B1EA2A9C400AF3432 /* WebsiteAPICommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebsiteAPICommunication.swift; path = Network/WebsiteAPICommunication.swift; sourceTree = "<group>"; };
 		FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Skill.swift; path = Models/Skill.swift; sourceTree = "<group>"; };
-		FA6BC13F1EA2B10A00AF3432 /* SkillsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillsCollectionViewController.swift; path = Controllers/SkillsCollectionViewController.swift; sourceTree = "<group>"; };
 		FACB63761E95C3A500EEBB02 /* GithubProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProject.swift; path = Models/GithubProject.swift; sourceTree = "<group>"; };
-		FACB63791E95C56400EEBB02 /* GithubProjectsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProjectsListTableViewController.swift; path = Controllers/GithubProjectsListTableViewController.swift; sourceTree = "<group>"; };
 		FACB637B1E95C57800EEBB02 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/HomeViewController.swift; sourceTree = "<group>"; };
+		FAE00A3C1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProjectsListTableViewController.swift; path = Controllers/Projects/GithubProjectsListTableViewController.swift; sourceTree = "<group>"; };
+		FAE00A3E1EA8565800C121C1 /* SkillsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillsCollectionViewController.swift; path = Controllers/Skills/SkillsCollectionViewController.swift; sourceTree = "<group>"; };
+		FAE00A431EA8569500C121C1 /* GithubProjectListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProjectListTableViewCell.swift; path = Controllers/Projects/CustomCell/GithubProjectListTableViewCell.swift; sourceTree = "<group>"; };
 		FAE2C61E1E8C69F9006FE6C3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
 		FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubAPICommunication.swift; path = Network/GithubAPICommunication.swift; sourceTree = "<group>"; };
@@ -142,11 +144,36 @@
 		FACB63781E95C54A00EEBB02 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FACB63791E95C56400EEBB02 /* GithubProjectsListTableViewController.swift */,
+				FAE00A3B1EA8563D00C121C1 /* Skills */,
+				FAE00A3A1EA8563300C121C1 /* Projects */,
 				FACB637B1E95C57800EEBB02 /* HomeViewController.swift */,
-				FA6BC13F1EA2B10A00AF3432 /* SkillsCollectionViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		FAE00A3A1EA8563300C121C1 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				FAE00A401EA8566400C121C1 /* CustomCells */,
+				FAE00A3C1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		FAE00A3B1EA8563D00C121C1 /* Skills */ = {
+			isa = PBXGroup;
+			children = (
+				FAE00A3E1EA8565800C121C1 /* SkillsCollectionViewController.swift */,
+			);
+			name = Skills;
+			sourceTree = "<group>";
+		};
+		FAE00A401EA8566400C121C1 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				FAE00A431EA8569500C121C1 /* GithubProjectListTableViewCell.swift */,
+			);
+			name = CustomCells;
 			sourceTree = "<group>";
 		};
 		FAE2C6181E8C67BB006FE6C3 /* Models */ = {
@@ -315,18 +342,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4A81121E969B3A000E3AFA /* PlistUtils.swift in Sources */,
+				FAE00A441EA8569500C121C1 /* GithubProjectListTableViewCell.swift in Sources */,
 				FA6BC13E1EA2AA5A00AF3432 /* Skill.swift in Sources */,
 				FACB637C1E95C57800EEBB02 /* HomeViewController.swift in Sources */,
 				FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */,
-				FA6BC1401EA2B10A00AF3432 /* SkillsCollectionViewController.swift in Sources */,
+				FAE00A3F1EA8565800C121C1 /* SkillsCollectionViewController.swift in Sources */,
 				FA621A861EA28E22004FB8D5 /* SortType.swift in Sources */,
 				FACB63771E95C3A500EEBB02 /* GithubProject.swift in Sources */,
 				FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */,
-				FACB637A1E95C56400EEBB02 /* GithubProjectsListTableViewController.swift in Sources */,
 				FA4A810F1E969A6C000E3AFA /* AppConstants.swift in Sources */,
 				FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */,
 				FA6BC13A1EA2A51300AF3432 /* HTTPRouter.swift in Sources */,
 				FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */,
+				FAE00A3D1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift in Sources */,
 				FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
