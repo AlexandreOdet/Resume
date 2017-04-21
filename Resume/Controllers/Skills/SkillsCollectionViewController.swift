@@ -37,7 +37,7 @@ class SkillsCollectionViewController: UIViewController {
   }
   
   private func fetchData() {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    NetworkUtils.spinner.start()
     firstly {
       websiteApiCommunication.fetchSkills()
       }.then { array -> Void in
@@ -48,7 +48,7 @@ class SkillsCollectionViewController: UIViewController {
         alertError.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertError, animated: true, completion: nil)
       }.always {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        NetworkUtils.spinner.stop()
     }
   }
 }

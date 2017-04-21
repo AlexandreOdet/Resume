@@ -36,14 +36,15 @@ class GithubProjectListTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell(style: .value1, reuseIdentifier: reuseIdentifier)
-    cell.textLabel?.text = projects[indexPath.row].projectName
-    cell.detailTextLabel?.text = projects[indexPath.row].language
+    let cell = GithubProjectListTableViewCell()
+    cell.labelNameProject.text = projects[indexPath.row].projectName
+    cell.labelDescriptionProject.text = projects[indexPath.row].description
+    cell.labelProjectLanguage.text = projects[indexPath.row].language
     return cell
   }
   
   private func fetchDataFromGithub() {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    NetworkUtils.spinner.start()
     firstly {
       GithubAPICommunication.fetchProjects()
       }.then { array -> Void in
@@ -51,7 +52,7 @@ class GithubProjectListTableViewController: UITableViewController {
         self.tableView.reloadData()
         self.setRightButtonItem()
       }.always {
-       UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        NetworkUtils.spinner.stop()
       }.catch { _ in
         let alertError = UIAlertController(title: "Erreur", message: "Erreur lors de la récupération des données", preferredStyle: .alert)
         alertError.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

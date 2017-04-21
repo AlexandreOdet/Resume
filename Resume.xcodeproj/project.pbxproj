@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6AC2BC1B584D08F16279960B /* Pods_Resume.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264320924A9AF0A969C40D82 /* Pods_Resume.framework */; };
+		FA0EC75F1EAAB060002CFFE3 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0EC75E1EAAB060002CFFE3 /* NetworkUtils.swift */; };
 		FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CC7771E8C65B3002CE7B3 /* AppDelegate.swift */; };
 		FA3CC77D1E8C65B3002CE7B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC77B1E8C65B3002CE7B3 /* Main.storyboard */; };
 		FA3CC77F1E8C65B3002CE7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC77E1E8C65B3002CE7B3 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		264320924A9AF0A969C40D82 /* Pods_Resume.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Resume.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50041D7B54403BE867081C2C /* Pods-Resume.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Resume.release.xcconfig"; path = "Pods/Target Support Files/Pods-Resume/Pods-Resume.release.xcconfig"; sourceTree = "<group>"; };
 		653ABBEBC9C108D048E1FCE7 /* Pods-Resume.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Resume.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Resume/Pods-Resume.debug.xcconfig"; sourceTree = "<group>"; };
+		FA0EC75E1EAAB060002CFFE3 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkUtils.swift; path = Utils/NetworkUtils.swift; sourceTree = "<group>"; };
 		FA3CC7741E8C65B3002CE7B3 /* Resume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Resume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3CC7771E8C65B3002CE7B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA3CC77C1E8C65B3002CE7B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				FA4A81111E969B3A000E3AFA /* PlistUtils.swift */,
+				FA0EC75E1EAAB060002CFFE3 /* NetworkUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				FAE00A3F1EA8565800C121C1 /* SkillsCollectionViewController.swift in Sources */,
 				FA621A861EA28E22004FB8D5 /* SortType.swift in Sources */,
 				FACB63771E95C3A500EEBB02 /* GithubProject.swift in Sources */,
+				FA0EC75F1EAAB060002CFFE3 /* NetworkUtils.swift in Sources */,
 				FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */,
 				FA4A810F1E969A6C000E3AFA /* AppConstants.swift in Sources */,
 				FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */,
