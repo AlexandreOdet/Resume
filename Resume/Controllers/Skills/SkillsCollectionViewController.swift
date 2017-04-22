@@ -10,30 +10,54 @@ import Foundation
 import UIKit
 import PromiseKit
 import SnapKit
-import CircleProgressBar
 
-class SkillsCollectionViewController: UIViewController {
+class SkillsCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
   private let websiteApiCommunication = WebsiteAPICommunication()
   private let maxValue = 80
+  private let reuseIdentifier = "SkillCell"
+
   var skills = [Skill]()
-  var circularProgressBar = CircleProgressBar()
-  var collectionView = UICollectionView()
+  var collectionView: UICollectionView!
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Change any of the properties you'd like
     self.view.backgroundColor = UIColor.white
-    self.view.addSubview(circularProgressBar)
-    circularProgressBar.progressBarTrackColor = UIColor.lightGray
-    circularProgressBar.progressBarProgressColor = UIColor.red
-    circularProgressBar.startAngle = -90
-    circularProgressBar.hintTextColor = UIColor.black
-    circularProgressBar.backgroundColor = UIColor.white
-    circularProgressBar.snp.makeConstraints { (make) -> Void in
-      make.center.equalTo(self.view)
-      make.size.equalTo(240)
+    
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+    layout.itemSize = CGSize(width: (UIScreen.main.bounds.width) / 2, height: 150)
+    layout.scrollDirection = .vertical
+    
+    collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+    self.collectionView.delegate = self
+    self.collectionView.dataSource = self
+    collectionView.register(SkillsCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    
+    self.view.addSubview(collectionView)
+    collectionView.snp.makeConstraints { (make) -> Void in
+      make.edges.equalTo(self.view)
     }
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.backgroundColor = UIColor(colorLiteralRed: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
     fetchData()
+  }
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return skills.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+                                                  for: indexPath) as! SkillsCollectionViewCell
+    cell.set(name: skills[indexPath.row].name)
+    cell.set(percentage: skills[indexPath.row].percentage)
+    return cell
   }
   
   private func fetchData() {
@@ -42,7 +66,8 @@ class SkillsCollectionViewController: UIViewController {
       websiteApiCommunication.fetchSkills()
       }.then { array -> Void in
         self.skills.append(contentsOf: array)
-        self.circularProgressBar.setProgress(CGFloat(self.skills[0].percentage) / 100, animated: true)
+        self.skills.sort(by: { $0.name < $1.name })
+        self.collectionView.reloadData()
       }.catch { error in
         let alertError = UIAlertController(title: "Erreur", message: "Erreur lors de la récupération des données", preferredStyle: .alert)
         alertError.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

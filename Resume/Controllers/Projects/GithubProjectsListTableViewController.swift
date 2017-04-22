@@ -69,24 +69,24 @@ class GithubProjectListTableViewController: UITableViewController {
     let alert = UIAlertController(title: "Trier par", message: nil, preferredStyle: .actionSheet)
     alert.addAction(UIAlertAction(title: "Ordre ascendant", style: .default, handler: {
       action in
-      self.sortProjectArray(sortType: .asc)
+      self.sortProjectArray(by: .ascOrder)
     }))
     alert.addAction(UIAlertAction(title: "Ordre descendant", style: .default, handler: {
       action in
-      self.sortProjectArray(sortType: .desc)
+      self.sortProjectArray(by: .descOrder)
     }))
     alert.addAction(UIAlertAction(title: "Langage", style: .default, handler: {
       action in
-      self.sortProjectArray(sortType: .langage)
+      self.sortProjectArray(by: .langage)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     self.present(alert, animated: true, completion: nil)
   }
   
-  func sortProjectArray(sortType: SortType) {
-    if sortType == .asc {
-      projects.sort(by: { $0.projectName < $1.projectName } )
-    } else if sortType == .desc {
+  func sortProjectArray(by sortType: SortType) {
+    if sortType == .ascOrder {
+      projects.sort(by: { $0.projectName < $1.projectName })
+    } else if sortType == .descOrder {
       projects.sort(by: { $0.projectName > $1.projectName })
     } else if sortType == .langage {
       projects.sort(by: { $0.language < $1.language })

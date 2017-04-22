@@ -17,6 +17,7 @@
 		FA4A81121E969B3A000E3AFA /* PlistUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4A81111E969B3A000E3AFA /* PlistUtils.swift */; };
 		FA4A81141E969E66000E3AFA /* Network.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA4A81131E969E66000E3AFA /* Network.plist */; };
 		FA621A861EA28E22004FB8D5 /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA621A851EA28E22004FB8D5 /* SortType.swift */; };
+		FA6883531EABE199007D6C92 /* SkillsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6883521EABE199007D6C92 /* SkillsCollectionViewCell.swift */; };
 		FA6BC13A1EA2A51300AF3432 /* HTTPRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */; };
 		FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13B1EA2A9C400AF3432 /* WebsiteAPICommunication.swift */; };
 		FA6BC13E1EA2AA5A00AF3432 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */; };
@@ -45,6 +46,7 @@
 		FA4A81111E969B3A000E3AFA /* PlistUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlistUtils.swift; path = Utils/PlistUtils.swift; sourceTree = "<group>"; };
 		FA4A81131E969E66000E3AFA /* Network.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Network.plist; sourceTree = "<group>"; };
 		FA621A851EA28E22004FB8D5 /* SortType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortType.swift; path = Enums/SortType.swift; sourceTree = "<group>"; };
+		FA6883521EABE199007D6C92 /* SkillsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillsCollectionViewCell.swift; path = Controllers/Skills/CustomCell/SkillsCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPRouter.swift; path = Enums/HTTPRouter.swift; sourceTree = "<group>"; };
 		FA6BC13B1EA2A9C400AF3432 /* WebsiteAPICommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebsiteAPICommunication.swift; path = Network/WebsiteAPICommunication.swift; sourceTree = "<group>"; };
 		FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Skill.swift; path = Models/Skill.swift; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			name = Enums;
 			sourceTree = "<group>";
 		};
+		FA6883511EABC92C007D6C92 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA6883521EABE199007D6C92 /* SkillsCollectionViewCell.swift */,
+			);
+			name = CustomCell;
+			sourceTree = "<group>";
+		};
 		FACB63781E95C54A00EEBB02 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +176,7 @@
 		FAE00A3B1EA8563D00C121C1 /* Skills */ = {
 			isa = PBXGroup;
 			children = (
+				FA6883511EABC92C007D6C92 /* CustomCell */,
 				FAE00A3E1EA8565800C121C1 /* SkillsCollectionViewController.swift */,
 			);
 			name = Skills;
@@ -360,6 +371,7 @@
 				FAE2C61F1E8C69F9006FE6C3 /* R.generated.swift in Sources */,
 				FAE00A3D1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift in Sources */,
 				FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */,
+				FA6883531EABE199007D6C92 /* SkillsCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

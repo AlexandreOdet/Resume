@@ -10,6 +10,6 @@ import Foundation
 
 enum SortType {
   case langage
-  case asc
-  case desc
+  case ascOrder
+  case descOrder
 }
