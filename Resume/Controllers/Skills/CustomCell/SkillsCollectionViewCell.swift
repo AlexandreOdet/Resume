@@ -20,6 +20,7 @@ class SkillsCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setUpView()
+    self.isUserInteractionEnabled = false
   }
   
   required init?(coder aDecoder: NSCoder) {

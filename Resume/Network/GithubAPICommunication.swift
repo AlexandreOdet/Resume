@@ -12,7 +12,7 @@ import PromiseKit
 import AlamofireObjectMapper
 
 class GithubAPICommunication {
-  static func fetchProjects() -> Promise<[GithubProject]> {
+  public class func fetchProjects() -> Promise<[GithubProject]> {
     return Promise { (fulfill, reject) in
       Alamofire.request(AppConstant.network.githubUrl!).responseArray(completionHandler: {
         (response: DataResponse<[GithubProject]>) in

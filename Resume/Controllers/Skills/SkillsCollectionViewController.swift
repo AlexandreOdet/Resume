@@ -23,16 +23,16 @@ class SkillsCollectionViewController: UIViewController, UICollectionViewDelegate
   override func viewDidLoad() {
     super.viewDidLoad()
     // Change any of the properties you'd like
-    self.view.backgroundColor = UIColor.white
+    view.backgroundColor = UIColor.white
     
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
     layout.itemSize = CGSize(width: (UIScreen.main.bounds.width) / 2, height: 150)
     layout.scrollDirection = .vertical
     
-    collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-    self.collectionView.delegate = self
-    self.collectionView.dataSource = self
+    collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+    collectionView.delegate = self
+    collectionView.dataSource = self
     collectionView.register(SkillsCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     
     self.view.addSubview(collectionView)

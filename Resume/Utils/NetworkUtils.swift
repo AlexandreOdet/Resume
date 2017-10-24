@@ -13,17 +13,17 @@ import SystemConfiguration
 class NetworkUtils {
   
   class spinner {
-    static func start() {
+    public class func start() {
       UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
-    static func stop() {
+    public class func stop() {
       UIApplication.shared.isNetworkActivityIndicatorVisible = false
     
     }
   }
 
-  static func isConnexionAvailable() -> Bool {
+  public class func isConnexionAvailable() -> Bool {
     var zeroAddress = sockaddr_in()
     zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
     zeroAddress.sin_family = sa_family_t(AF_INET)
