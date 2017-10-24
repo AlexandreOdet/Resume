@@ -70,23 +70,18 @@ class GithubProjectListTableViewController: UIViewController {
   func sortButtonTarget() {
     let alert = UIAlertController(title: "Trier par", message: nil, preferredStyle: .actionSheet)
     alert.addAction(UIAlertAction(title: "Ordre ascendant", style: .default, handler: {
-      action in
-      self.sortProjectArray(by: .ascOrder)
+      _ in
+      self.viewModel.sort(by: .ascOrder)
     }))
     alert.addAction(UIAlertAction(title: "Ordre descendant", style: .default, handler: {
-      action in
-      self.sortProjectArray(by: .descOrder)
+      _ in
+      self.viewModel.sort(by: .descOrder)
     }))
     alert.addAction(UIAlertAction(title: "Langage", style: .default, handler: {
-      action in
-      self.sortProjectArray(by: .langage)
+      _ in
+      self.viewModel.sort(by: .langage)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     self.present(alert, animated: true, completion: nil)
   }
-  
-  func sortProjectArray(by sortType: SortType) {
-    viewModel.sort(by: sortType)
-  }
-  
 }
