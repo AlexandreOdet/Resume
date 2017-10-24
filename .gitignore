@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Explore
- @MaddDogg0001
- Sign out
- Unwatch 2
-  Star 1  Fork 0 MaddDogg0001/Nightline
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
-Branch: develop Find file Copy pathNightline/.gitignore
-c58c173  on 14 Sep
-@xploit42 xploit42 Add gitignore
-1 contributor
-RawBlameHistory     
-84 lines (72 sloc)  1.63 KB
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
@@ -99,15 +81,3 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
-© 2017 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
