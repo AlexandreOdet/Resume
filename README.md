@@ -5,7 +5,8 @@ Entirely written in Swift 3.1
 Pods I use to help me through development.
   - Alamofire
   - SnapKit
-  - PromiseKit
+  - RxSwift
   - ObjectMapper
   - R.Swift
   - AlamofireObjectMapper
+  - MVVM Architecture
