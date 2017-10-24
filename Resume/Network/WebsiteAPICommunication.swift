@@ -8,23 +8,28 @@
 
 import Foundation
 import Alamofire
-import PromiseKit
 import AlamofireObjectMapper
+import RxSwift
 
 class WebsiteAPICommunication: BaseAPICommunication {
-  
-  func fetchSkills() -> Promise<[Skill]> {
-    return Promise { (fulfill, reject) in
-      self.request = Alamofire.request(HTTPRouter.skills.url, method: .get).responseArray(completionHandler: {
-        (response: DataResponse<[Skill]>) in
-        switch response.result {
-        case .success(let array):
-          fulfill(array)
-        case .failure(let error):
-          reject(error)
-        }
+  func fetchData() -> Observable<[Skill]> {
+    return Observable<[Skill]>
+      .create({ observer -> Disposable in
+        self.request = Alamofire.request(HTTPRouter.skills.url)
+          .validate()
+          .responseArray(completionHandler: {
+            (response: DataResponse<[Skill]>) in
+            switch response.result {
+            case .success(let projects):
+              observer.onNext(projects)
+              observer.onCompleted()
+            case .failure(let error):
+              observer.onError(error)
+            }
+          })
+        return Disposables.create(with: {
+          self.request?.cancel()
+        })
       })
-    }
   }
-  
 }

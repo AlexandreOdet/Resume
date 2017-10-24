@@ -8,17 +8,33 @@
 
 import Foundation
 import UIKit
-import PromiseKit
 import SnapKit
+import RxCocoa
+import RxSwift
 
-class SkillsCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-  private let websiteApiCommunication = WebsiteAPICommunication()
+class SkillsCollectionViewController: UIViewController {
   private let maxValue = 80
   private let reuseIdentifier = "SkillCell"
-
+  private let disposeBag = DisposeBag()
+  
   var skills = [Skill]()
   var collectionView: UICollectionView!
   
+  var viewModel: SkillsViewModel!
+  
+  deinit {
+    viewModel.cancelRequest()
+  }
+  
+  init() {
+    super.init(nibName: nil, bundle: Bundle.main)
+    viewModel = SkillsViewModel()
+    viewModel.fetchData()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,8 +47,6 @@ class SkillsCollectionViewController: UIViewController, UICollectionViewDelegate
     layout.scrollDirection = .vertical
     
     collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-    collectionView.delegate = self
-    collectionView.dataSource = self
     collectionView.register(SkillsCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     
     self.view.addSubview(collectionView)
@@ -40,40 +54,17 @@ class SkillsCollectionViewController: UIViewController, UICollectionViewDelegate
       make.edges.equalTo(self.view)
     }
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.backgroundColor = UIColor(colorLiteralRed: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
-    fetchData()
+    collectionView.backgroundColor = UIColor.veryLightGray
+    setUpBindings()
+  }
+
+  func setUpBindings() {
+    viewModel.observableSkills
+      .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: SkillsCollectionViewCell.self))
+      { row, element, cell in
+      cell.set(name: element.name)
+      cell.set(percentage: element.percentage)
+    }.disposed(by: disposeBag)
   }
   
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 1
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return skills.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
-                                                  for: indexPath) as! SkillsCollectionViewCell
-    cell.set(name: skills[indexPath.row].name)
-    cell.set(percentage: skills[indexPath.row].percentage)
-    return cell
-  }
-  
-  private func fetchData() {
-    NetworkUtils.spinner.start()
-    firstly {
-      websiteApiCommunication.fetchSkills()
-      }.then { array -> Void in
-        self.skills.append(contentsOf: array)
-        self.skills.sort(by: { $0.name < $1.name })
-        self.collectionView.reloadData()
-      }.catch { error in
-        let alertError = UIAlertController(title: "Erreur", message: "Erreur lors de la récupération des données", preferredStyle: .alert)
-        alertError.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertError, animated: true, completion: nil)
-      }.always {
-        NetworkUtils.spinner.stop()
-    }
-  }
 }

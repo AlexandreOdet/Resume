@@ -10,9 +10,9 @@ import Foundation
 import Alamofire
 
 class BaseAPICommunication {
-  var request: Alamofire.Request?
+  internal var request: Alamofire.Request?
   
   func cancelRequest() {
-    request.cancel()
+    request?.cancel()
   }
 }

@@ -7,7 +7,6 @@ target 'Resume' do
   pod 'Alamofire'
   pod 'SnapKit', '~> 3.2.0'
   pod 'ObjectMapper'
-  pod 'R.swift'
   pod 'AlamofireObjectMapper'
   pod 'RxSwift'
   pod 'RxCocoa'

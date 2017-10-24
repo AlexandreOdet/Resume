@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
     self.view.backgroundColor = UIColor.black
     
     let background = UIImageView()
-    background.image = R.image.wallpaper()
+    //background.image = R.image.wallpaper()
     self.view.addSubview(background)
     background.snp.makeConstraints { (make) -> Void in
       make.edges.equalTo(self.view)
@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
       make.size.equalTo(100)
     }
     profileImage.translatesAutoresizingMaskIntoConstraints = false
-    profileImage.image = R.image.profile()
+    //profileImage.image = R.image.profile()
     profileImage.round()
     
     addHeaderView()
