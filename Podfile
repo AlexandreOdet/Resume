@@ -5,11 +5,9 @@ target 'Resume' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'Alamofire'
-  pod 'SnapKit'
+  pod 'SnapKit', '~> 3.2.0'
   pod 'ObjectMapper'
   pod 'R.swift'
-  pod 'PromiseKit'
-  pod 'PromiseKit/Alamofire'
   pod 'AlamofireObjectMapper'
   pod 'RxSwift'
   pod 'RxCocoa'

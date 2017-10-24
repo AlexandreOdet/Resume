@@ -11,11 +11,11 @@ import Alamofire
 import PromiseKit
 import AlamofireObjectMapper
 
-class WebsiteAPICommunication {
+class WebsiteAPICommunication: BaseAPICommunication {
   
   func fetchSkills() -> Promise<[Skill]> {
     return Promise { (fulfill, reject) in
-      Alamofire.request(HTTPRouter.skills.url, method: .get).responseArray(completionHandler: {
+      self.request = Alamofire.request(HTTPRouter.skills.url, method: .get).responseArray(completionHandler: {
         (response: DataResponse<[Skill]>) in
         switch response.result {
         case .success(let array):
