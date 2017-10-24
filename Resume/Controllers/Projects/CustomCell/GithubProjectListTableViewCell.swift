@@ -14,9 +14,9 @@ class GithubProjectListTableViewCell: UITableViewCell {
   var labelNameProject = UILabel()
   var labelDescriptionProject = UILabel()
   var labelProjectLanguage = UILabel()
- 
-  init() {
-    super.init(style: .default, reuseIdentifier: "")
+  
+  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     setUpView()
   }
   

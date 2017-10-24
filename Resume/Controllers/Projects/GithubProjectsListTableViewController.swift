@@ -19,6 +19,8 @@ class GithubProjectListTableViewController: UIViewController {
   
   var viewModel: ProjectViewModel!
   
+  var tableView: UITableView!
+  
   deinit {
     viewModel.cancelRequest()
   }
@@ -26,6 +28,7 @@ class GithubProjectListTableViewController: UIViewController {
   init() {
     super.init(nibName: nil, bundle: Bundle.main)
     viewModel = ProjectViewModel()
+    viewModel.fetchData()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -34,65 +37,56 @@ class GithubProjectListTableViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    self.tableView = UITableView(frame: self.view.frame, style: .grouped)
-//    self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-//    self.title = "Mes projets"
-//    tableView.isUserInteractionEnabled = false
-//    fetchDataFromGithub()
-//  }
-//
-//  override func numberOfSections(in tableView: UITableView) -> Int {
-//    return 1
-//  }
-//
-//  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    return projects.count
-//  }
-//
-//  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    let cell = GithubProjectListTableViewCell()
-//    cell.labelNameProject.text = projects[indexPath.row].projectName
-//    cell.labelDescriptionProject.text = projects[indexPath.row].description
-//    cell.labelProjectLanguage.text = projects[indexPath.row].language
-//    return cell
-//  }
+    setUpTableView()
+    setRightButtonItem()
   }
   
-  func setRightButtonItem() {
+  private func setUpTableView() {
+    tableView = UITableView(frame: view.frame, style: .grouped)
+    tableView.register(GithubProjectListTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+    
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { (make) -> Void in
+      make.edges.equalToSuperview()
+    }
+    
+    viewModel.observableItems.bind(to: tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: GithubProjectListTableViewCell.self)) {
+      row, element, cell in
+      cell.labelNameProject.text = element.projectName
+      cell.labelDescriptionProject.text = element.description
+      cell.labelProjectLanguage.text = element.language
+      cell.selectionStyle = .none
+    }.disposed(by: disposeBag)
+  }
+  
+  private func setRightButtonItem() {
     let item = UIBarButtonItem(image: UIImage(named: "order"), style: .plain, target: self, action: nil)
-    //let item = UIBarButtonItem(image: R.image.order(), style: .plain, target: self, action: #selector(sortButtonTarget))
     self.navigationItem.rightBarButtonItem = item
     navigationItem.rightBarButtonItem?.rx.tap.subscribe (onNext: { [unowned self] _ in
-      //to-do
+      self.sortButtonTarget()
     }).disposed(by: disposeBag)
   }
   
   func sortButtonTarget() {
-//    let alert = UIAlertController(title: "Trier par", message: nil, preferredStyle: .actionSheet)
-//    alert.addAction(UIAlertAction(title: "Ordre ascendant", style: .default, handler: {
-//      action in
-//      self.sortProjectArray(by: .ascOrder)
-//    }))
-//    alert.addAction(UIAlertAction(title: "Ordre descendant", style: .default, handler: {
-//      action in
-//      self.sortProjectArray(by: .descOrder)
-//    }))
-//    alert.addAction(UIAlertAction(title: "Langage", style: .default, handler: {
-//      action in
-//      self.sortProjectArray(by: .langage)
-//    }))
-//    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
-//    self.present(alert, animated: true, completion: nil)
+    let alert = UIAlertController(title: "Trier par", message: nil, preferredStyle: .actionSheet)
+    alert.addAction(UIAlertAction(title: "Ordre ascendant", style: .default, handler: {
+      action in
+      self.sortProjectArray(by: .ascOrder)
+    }))
+    alert.addAction(UIAlertAction(title: "Ordre descendant", style: .default, handler: {
+      action in
+      self.sortProjectArray(by: .descOrder)
+    }))
+    alert.addAction(UIAlertAction(title: "Langage", style: .default, handler: {
+      action in
+      self.sortProjectArray(by: .langage)
+    }))
+    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
+    self.present(alert, animated: true, completion: nil)
   }
   
   func sortProjectArray(by sortType: SortType) {
-//    if sortType == .ascOrder {
-//      projects.sort(by: { $0.projectName < $1.projectName })
-//    } else if sortType == .descOrder {
-//      projects.sort(by: { $0.projectName > $1.projectName })
-//    } else if sortType == .langage {
-//      projects.sort(by: { $0.language < $1.language })
-//    }
+    viewModel.sort(by: sortType)
   }
   
 }

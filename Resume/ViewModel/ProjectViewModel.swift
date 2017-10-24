@@ -19,7 +19,9 @@ class ProjectViewModel: ViewModelProtocol {
   var items = Variable<[GithubProject]>([])
   
   var observableItems: Observable<[GithubProject]> {
-    return items.asObservable()
+    return items
+      .asObservable()
+      .catchErrorJustReturn([])
   }
   
   func cancelRequest() {
@@ -40,5 +42,16 @@ class ProjectViewModel: ViewModelProtocol {
         return
       }
     }).disposed(by: disposeBag)
+  }
+  
+  func sort(by type: SortType) {
+    switch type {
+    case .ascOrder:
+      items.value = items.value.sorted(by: { $0.projectName < $1.projectName })
+    case .descOrder:
+      items.value = items.value.sorted(by: { $0.projectName > $1.projectName })
+    case .langage:
+      items.value = items.value.sorted(by: {$0.language < $1.language })
+    }
   }
 }
