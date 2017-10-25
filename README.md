@@ -6,7 +6,8 @@ Pods I use to help me through development.
   - Alamofire
   - SnapKit
   - RxSwift
+  - RxCocoa
   - ObjectMapper
-  - R.Swift
   - AlamofireObjectMapper
+  - CircleProgressBar
   - MVVM Architecture
