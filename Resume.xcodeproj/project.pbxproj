@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		454429C967EBA45CB698B50E /* Pods_Resume.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2016A16C550A073A434E998 /* Pods_Resume.framework */; };
 		FA0EC75F1EAAB060002CFFE3 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0EC75E1EAAB060002CFFE3 /* NetworkUtils.swift */; };
+		FA330D4E1FA0B62F004DC374 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA330D4D1FA0B62F004DC374 /* HomeCollectionViewCell.swift */; };
 		FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CC7771E8C65B3002CE7B3 /* AppDelegate.swift */; };
 		FA3CC77D1E8C65B3002CE7B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC77B1E8C65B3002CE7B3 /* Main.storyboard */; };
 		FA3CC77F1E8C65B3002CE7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA3CC77E1E8C65B3002CE7B3 /* Assets.xcassets */; };
@@ -23,7 +24,6 @@
 		FA6BC13E1EA2AA5A00AF3432 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */; };
 		FA74951A1FA07C7900BF502E /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7495191FA07C7900BF502E /* Study.swift */; };
 		FA74951C1FA07ECE00BF502E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74951B1FA07ECE00BF502E /* HomeViewModel.swift */; };
-		FA74951F1FA07FCD00BF502E /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74951E1FA07FCD00BF502E /* HomeCollectionViewCell.swift */; };
 		FA7495211FA07FE700BF502E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7495201FA07FE700BF502E /* HomeViewController.swift */; };
 		FAACB8F31F9F7105000AD33F /* SkillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACB8F21F9F7105000AD33F /* SkillsViewModel.swift */; };
 		FAACB8F51F9F72D7000AD33F /* BaseAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACB8F41F9F72D7000AD33F /* BaseAPICommunication.swift */; };
@@ -43,6 +43,7 @@
 		6151E40BC18FF6E1FE6CBE34 /* Pods-Resume.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Resume.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Resume/Pods-Resume.debug.xcconfig"; sourceTree = "<group>"; };
 		C2016A16C550A073A434E998 /* Pods_Resume.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Resume.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0EC75E1EAAB060002CFFE3 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkUtils.swift; path = Utils/NetworkUtils.swift; sourceTree = "<group>"; };
+		FA330D4D1FA0B62F004DC374 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewCell.swift; path = Controllers/Home/CustomCell/HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA3CC7741E8C65B3002CE7B3 /* Resume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Resume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3CC7771E8C65B3002CE7B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA3CC77C1E8C65B3002CE7B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Skill.swift; path = Models/Skill.swift; sourceTree = "<group>"; };
 		FA7495191FA07C7900BF502E /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Study.swift; path = Models/Study.swift; sourceTree = "<group>"; };
 		FA74951B1FA07ECE00BF502E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = ViewModel/HomeViewModel.swift; sourceTree = "<group>"; };
-		FA74951E1FA07FCD00BF502E /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewCell.swift; path = Controllers/Home/HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA7495201FA07FE700BF502E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/Home/HomeViewController.swift; sourceTree = "<group>"; };
 		FAACB8F21F9F7105000AD33F /* SkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SkillsViewModel.swift; path = ViewModel/SkillsViewModel.swift; sourceTree = "<group>"; };
 		FAACB8F41F9F72D7000AD33F /* BaseAPICommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAPICommunication.swift; path = Network/BaseAPICommunication.swift; sourceTree = "<group>"; };
@@ -101,6 +101,14 @@
 				42D8B3E8379EFDC81626AAF5 /* Pods-Resume.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA330D4C1FA0B60A004DC374 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA330D4D1FA0B62F004DC374 /* HomeCollectionViewCell.swift */,
+			);
+			name = CustomCell;
 			sourceTree = "<group>";
 		};
 		FA3CC76B1E8C65B3002CE7B3 = {
@@ -172,8 +180,8 @@
 		FA74951D1FA07FAF00BF502E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FA330D4C1FA0B60A004DC374 /* CustomCell */,
 				FA7495201FA07FE700BF502E /* HomeViewController.swift */,
-				FA74951E1FA07FCD00BF502E /* HomeCollectionViewCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -427,7 +435,7 @@
 				FAE00A3D1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift in Sources */,
 				FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */,
 				FA6883531EABE199007D6C92 /* SkillsCollectionViewCell.swift in Sources */,
-				FA74951F1FA07FCD00BF502E /* HomeCollectionViewCell.swift in Sources */,
+				FA330D4E1FA0B62F004DC374 /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

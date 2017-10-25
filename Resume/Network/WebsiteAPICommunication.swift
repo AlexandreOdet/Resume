@@ -34,7 +34,24 @@ class WebsiteAPICommunication: BaseAPICommunication {
       })
   }
   
-  func fetchStudies() -> Driver<[Study]> {
-    return Driver.empty()
+  func fetchStudies() -> Observable<[Study]> {
+    return Observable<[Study]>
+      .create({ observer -> Disposable in
+        self.request = Alamofire.request(HTTPRouter.skills.url)
+          .validate()
+          .responseArray(completionHandler: {
+            (response: DataResponse<[Study]>) in
+            switch response.result {
+            case .success(let projects):
+              observer.onNext(projects)
+              observer.onCompleted()
+            case .failure(let error):
+              observer.onError(error)
+            }
+          })
+        return Disposables.create(with: {
+          self.request?.cancel()
+        })
+      })
   }
 }

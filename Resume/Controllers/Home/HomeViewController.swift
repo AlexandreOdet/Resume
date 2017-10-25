@@ -16,11 +16,43 @@ class HomeViewController: UIViewController {
   
   private let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
   private let disposeBag = DisposeBag()
+  private let viewModel = HomeViewModel()
+  
+  var collectionView: UICollectionView!
+  
+  deinit {
+    viewModel.cancelRequest()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setUpView()
     setUpNavigationBarButtons()
+    setUpBindings()
+  }
+  
+  func setUpBindings() {
+    viewModel.networkError.subscribe({ [weak self] event in
+      guard let `self` = self else { return }
+      switch event {
+      case .next(_):
+        self.showNetworkAlert()
+      default:
+        return
+      }
+    }).disposed(by: disposeBag)
+  }
+  
+  func showNetworkAlert() {
+    let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
+      [weak self] _ in
+      guard let `self` = self else { return }
+      self.viewModel.fetchData()
+    }))
+    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
+    present(alert, animated: true, completion: nil)
   }
   
   override func didReceiveMemoryWarning() {
@@ -49,8 +81,6 @@ class HomeViewController: UIViewController {
     
     addHeaderView()
   }
-  
-  //offset = (80 - (self.navigationController.navigationBar.frame.height + UIApplication.shared.statusBar.frame.height))
   
   private func addHeaderView() {
     let headerView = UIView()
