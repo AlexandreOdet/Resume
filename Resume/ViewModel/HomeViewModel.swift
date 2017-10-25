@@ -13,14 +13,17 @@ import RxCocoa
 class HomeViewModel: ViewModelProtocol {
   
   private let apiCommunication = WebsiteAPICommunication()
+  private let disposeBag = DisposeBag()
   
   var studies = Variable<[Study]>([])
   
   var networkError: PublishSubject<Error> = PublishSubject()
   
   func fetchData() {
+    NetworkUtils.spinner.start()
     apiCommunication.fetchStudies().subscribe({ [weak self] event in
       guard let `self` = self else { return }
+      NetworkUtils.spinner.stop()
       switch event {
       case .next(let data):
         if !self.studies.value.isEmpty {
@@ -32,7 +35,7 @@ class HomeViewModel: ViewModelProtocol {
       case .completed:
         return
       }
-    }).dispose()
+    }).disposed(by: disposeBag)
   }
   
   func cancelRequest() {

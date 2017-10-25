@@ -35,9 +35,10 @@ class WebsiteAPICommunication: BaseAPICommunication {
   }
   
   func fetchStudies() -> Observable<[Study]> {
+    print("URL = \(HTTPRouter.studies.url)")
     return Observable<[Study]>
       .create({ observer -> Disposable in
-        self.request = Alamofire.request(HTTPRouter.skills.url)
+        self.request = Alamofire.request(HTTPRouter.studies.url)
           .validate()
           .responseArray(completionHandler: {
             (response: DataResponse<[Study]>) in

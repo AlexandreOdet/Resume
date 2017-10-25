@@ -32,6 +32,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
       make.width.equalToSuperview()
     }
     schoolNameLabel.textAlignment = .center
+    schoolNameLabel.adjustsFontSizeToFitWidth = true
     
     contentView.addSubview(diplomaLabel)
     diplomaLabel.snp.makeConstraints { (make) -> Void in
@@ -39,12 +40,15 @@ class HomeCollectionViewCell: UICollectionViewCell {
       make.top.equalTo(schoolNameLabel.snp.bottom).offset(10)
     }
     diplomaLabel.textAlignment = .center
+    diplomaLabel.adjustsFontSizeToFitWidth = true
     
     contentView.addSubview(datesLabel)
     datesLabel.snp.makeConstraints { (make) -> Void in
       make.width.equalToSuperview()
       make.bottom.equalToSuperview().offset(-10)
     }
+    datesLabel.textAlignment = .center
+    datesLabel.adjustsFontSizeToFitWidth = true
   }
   
 }

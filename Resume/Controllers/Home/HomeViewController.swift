@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
   private let disposeBag = DisposeBag()
   private let viewModel = HomeViewModel()
   
+  private let reuseIdentifier = "HomeCollectionViewCell"
+  
   var collectionView: UICollectionView!
   
   deinit {
@@ -29,6 +31,7 @@ class HomeViewController: UIViewController {
     setUpView()
     setUpNavigationBarButtons()
     setUpBindings()
+    setUpCollectionView()
   }
   
   func setUpBindings() {
@@ -149,5 +152,43 @@ class HomeViewController: UIViewController {
     }).disposed(by: disposeBag)
     self.navigationItem.leftBarButtonItem = leftButton
   }
+  
+  private func setUpCollectionView() {
+    viewModel.fetchData()
+    let width = UIScreen.main.bounds.width
+    let layout = UICollectionViewFlowLayout()
+    layout.itemSize = CGSize(width: width / 2, height: 90)
+    layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    layout.scrollDirection = .horizontal
+    
+    collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+    collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    
+    view.addSubview(collectionView)
+    collectionView.snp.makeConstraints { (make) -> Void in
+      make.bottom.equalToSuperview()
+      make.width.equalToSuperview()
+      make.centerX.equalToSuperview()
+      make.height.equalTo(80)
+    }
+    collectionView.backgroundColor = UIColor.veryLightGray
+    viewModel.studies.asObservable()
+      .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: HomeCollectionViewCell.self)) {
+        row, element, cell in
+        cell.backgroundColor = .white
+        cell.schoolNameLabel.text = element.school
+        if let diploma = element.diploma {
+          if !diploma.isEmpty {
+            cell.diplomaLabel.text = diploma
+          } else {
+            cell.diplomaLabel.text = "Pas de diplome"
+          }
+        } else {
+          cell.diplomaLabel.text = "Pas de diplome"
+        }
+        cell.datesLabel.text = "Du \(element.begin!)  au \(element.end!)"
+    }.disposed(by: disposeBag)
+  }
+  
 }
 
