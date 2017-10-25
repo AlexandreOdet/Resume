@@ -29,7 +29,9 @@ class ProjectViewModel: ViewModelProtocol {
   }
   
   func fetchData() {
+    NetworkUtils.spinner.start()
     apiCommunication.fetchProjects().subscribe({ [weak self] event -> Void in
+      NetworkUtils.spinner.stop()
       guard let `self` = self else { return }
       switch event {
       case .next(let projects):

@@ -61,7 +61,7 @@ class GithubProjectListTableViewController: UIViewController {
   
   private func setRightButtonItem() {
     let item = UIBarButtonItem(image: UIImage(named: "order"), style: .plain, target: self, action: nil)
-    self.navigationItem.rightBarButtonItem = item
+    navigationItem.rightBarButtonItem = item
     navigationItem.rightBarButtonItem?.rx.tap.subscribe (onNext: { [unowned self] _ in
       self.sortButtonTarget()
     }).disposed(by: disposeBag)
@@ -82,6 +82,6 @@ class GithubProjectListTableViewController: UIViewController {
       self.viewModel.sort(by: .langage)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
-    self.present(alert, animated: true, completion: nil)
+    present(alert, animated: true, completion: nil)
   }
 }

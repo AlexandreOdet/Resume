@@ -30,8 +30,10 @@ class SkillsViewModel: ViewModelProtocol {
   }
   
   func fetchData() {
+    NetworkUtils.spinner.start()
     apiCommunication.fetchData().subscribe( { [weak self] event in
       guard let `self` = self else { return }
+      NetworkUtils.spinner.stop()
       switch event {
       case .next(var data):
         self.skillsItems.value.removeAll()
