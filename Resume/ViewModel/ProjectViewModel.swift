@@ -14,7 +14,7 @@ class ProjectViewModel: ViewModelProtocol {
   
   lazy var disposeBag = DisposeBag()
   
-  var apiCommunication = GithubAPICommunication()
+  private let apiCommunication = GithubAPICommunication()
   
   var items = Variable<[GithubProject]>([])
   

@@ -10,9 +10,10 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 import RxSwift
+import RxCocoa
 
 class WebsiteAPICommunication: BaseAPICommunication {
-  func fetchData() -> Observable<[Skill]> {
+  func fetchSkills() -> Observable<[Skill]> {
     return Observable<[Skill]>
       .create({ observer -> Disposable in
         self.request = Alamofire.request(HTTPRouter.skills.url)
@@ -31,5 +32,9 @@ class WebsiteAPICommunication: BaseAPICommunication {
           self.request?.cancel()
         })
       })
+  }
+  
+  func fetchStudies() -> Driver<[Study]> {
+    return Driver.empty()
   }
 }

@@ -15,7 +15,7 @@ class SkillsViewModel: ViewModelProtocol {
   
   lazy var disposeBag = DisposeBag()
   
-  var apiCommunication = WebsiteAPICommunication()
+  private let apiCommunication = WebsiteAPICommunication()
   
   var skillsItems =  Variable<[Skill]>([])
   
@@ -31,7 +31,7 @@ class SkillsViewModel: ViewModelProtocol {
   
   func fetchData() {
     NetworkUtils.spinner.start()
-    apiCommunication.fetchData().subscribe( { [weak self] event in
+    apiCommunication.fetchSkills().subscribe( { [weak self] event in
       guard let `self` = self else { return }
       NetworkUtils.spinner.stop()
       switch event {
