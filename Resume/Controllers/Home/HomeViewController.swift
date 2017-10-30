@@ -11,14 +11,18 @@ import SnapKit
 import Alamofire
 import RxCocoa
 import RxSwift
+import MessageUI
 
 final class HomeViewController: UIViewController {
   
   private let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
   private let disposeBag = DisposeBag()
   private let viewModel = HomeViewModel()
+  private let localisation = "Toulouse, FR"
   
   private let reuseIdentifier = "HomeCollectionViewCell"
+  
+  var canSendMail: Variable<Bool> = Variable(true)
   
   var collectionView: UICollectionView!
   
@@ -118,6 +122,43 @@ final class HomeViewController: UIViewController {
     ageLabel.textColor = UIColor.darkGray
     ageLabel.textAlignment = .center
     
+    let localisationLabel = UILabel()
+    let mailLabel = UILabel()
+    
+    view.addSubview(localisationLabel)
+    localisationLabel.snp.makeConstraints { (make) -> Void in
+      make.top.equalTo(nameLabel.snp.bottom).offset(10)
+      make.leading.equalTo(nameLabel)
+      make.trailing.equalTo(headerView.snp.centerX).offset(-5)
+    }
+    localisationLabel.text = localisation
+    localisationLabel.adjustsFontSizeToFitWidth = true
+    
+    view.addSubview(mailLabel)
+    mailLabel.snp.makeConstraints { (make) -> Void in
+      make.top.equalTo(ageLabel.snp.bottom).offset(10)
+      make.trailing.equalTo(ageLabel)
+      make.leading.equalTo(headerView.snp.centerX).offset(5)
+    }
+    canSendMail.asObservable().bind(to: mailLabel.rx.isUserInteractionEnabled).disposed(by: disposeBag)
+    
+    mailLabel.text = "odet.alexandre.93@gmail.com"
+    mailLabel.adjustsFontSizeToFitWidth = true
+    
+    let tapGesture = UITapGestureRecognizer()
+    mailLabel.addGestureRecognizer(tapGesture)
+    
+    tapGesture.rx.event.bind(onNext: { recognizer in
+      let mailViewController = MFMailComposeViewController()
+      mailViewController.setToRecipients(["odet.alexandre.93@gmail.com"])
+      mailViewController.setSubject("Contact depuis l'application Resume")
+      mailViewController.setMessageBody("", isHTML: false)
+      if MFMailComposeViewController.canSendMail() {
+        self.present(mailViewController, animated: true, completion: nil)
+      } else {
+        self.displayCannotSendMailErrorAlert()
+      }
+    }).disposed(by: disposeBag)
   }
   
   private func getDifferenceBetweenTwoYears(begin: Int, end: Int) -> Int {
@@ -186,5 +227,20 @@ final class HomeViewController: UIViewController {
     }.disposed(by: disposeBag)
   }
   
+  func displayCannotSendMailErrorAlert() {
+    let alert = UIAlertController(title: "Oops", message: "Seems like your device can't send e-mail !", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+      _ in
+      self.canSendMail.value = false
+    }))
+    present(alert, animated: true, completion: nil)
+  }
+  
+}
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    controller.dismiss(animated: true, completion: nil)
+  }
 }
 
