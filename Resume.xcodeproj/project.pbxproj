@@ -35,6 +35,7 @@
 		FAE00A3F1EA8565800C121C1 /* SkillsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE00A3E1EA8565800C121C1 /* SkillsCollectionViewController.swift */; };
 		FAE00A441EA8569500C121C1 /* GithubProjectListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE00A431EA8569500C121C1 /* GithubProjectListTableViewCell.swift */; };
 		FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */; };
+		FAE9831B1FA71E2400F3B46A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9831A1FA71E2400F3B46A /* Error.swift */; };
 		FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		FAE00A3E1EA8565800C121C1 /* SkillsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillsCollectionViewController.swift; path = Controllers/Skills/SkillsCollectionViewController.swift; sourceTree = "<group>"; };
 		FAE00A431EA8569500C121C1 /* GithubProjectListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProjectListTableViewCell.swift; path = Controllers/Projects/CustomCell/GithubProjectListTableViewCell.swift; sourceTree = "<group>"; };
 		FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
+		FAE9831A1FA71E2400F3B46A /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Enums/Error.swift; sourceTree = "<group>"; };
 		FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubAPICommunication.swift; path = Network/GithubAPICommunication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 			children = (
 				FA621A851EA28E22004FB8D5 /* SortType.swift */,
 				FA6BC1391EA2A51300AF3432 /* HTTPRouter.swift */,
+				FAE9831A1FA71E2400F3B46A /* Error.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				FAE00A3D1EA8564D00C121C1 /* GithubProjectsListTableViewController.swift in Sources */,
 				FA6BC13C1EA2A9C400AF3432 /* WebsiteAPICommunication.swift in Sources */,
 				FA6883531EABE199007D6C92 /* SkillsCollectionViewCell.swift in Sources */,
+				FAE9831B1FA71E2400F3B46A /* Error.swift in Sources */,
 				FA330D4E1FA0B62F004DC374 /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

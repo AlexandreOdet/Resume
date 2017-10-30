@@ -50,8 +50,9 @@ class GithubProjectListTableViewController: UIViewController {
       make.edges.equalToSuperview()
     }
     
-    viewModel.observableItems.bind(to: tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: GithubProjectListTableViewCell.self)) {
-      row, element, cell in
+    viewModel.observableItems.bind(to: tableView.rx.items(cellIdentifier: reuseIdentifier,
+                                                          cellType: GithubProjectListTableViewCell.self)) {
+      _, element, cell in
       cell.labelNameProject.text = element.projectName
       cell.labelDescriptionProject.text = element.description
       cell.labelProjectLanguage.text = element.language

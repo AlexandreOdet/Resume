@@ -38,7 +38,6 @@ class SkillsCollectionViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Change any of the properties you'd like
     view.backgroundColor = UIColor.white
     
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -49,9 +48,9 @@ class SkillsCollectionViewController: UIViewController {
     collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
     collectionView.register(SkillsCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     
-    self.view.addSubview(collectionView)
+    view.addSubview(collectionView)
     collectionView.snp.makeConstraints { (make) -> Void in
-      make.edges.equalTo(self.view)
+      make.edges.equalToSuperview()
     }
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.backgroundColor = UIColor.veryLightGray
@@ -61,7 +60,7 @@ class SkillsCollectionViewController: UIViewController {
   func setUpBindings() {
     viewModel.observableSkills
       .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: SkillsCollectionViewCell.self))
-      { row, element, cell in
+      { _, element, cell in
       cell.set(name: element.name)
       cell.set(percentage: element.percentage)
     }.disposed(by: disposeBag)

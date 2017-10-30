@@ -35,14 +35,9 @@ class HomeViewController: UIViewController {
   }
   
   func setUpBindings() {
-    viewModel.networkError.subscribe({ [weak self] event in
+    viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.UnknownError).drive(onNext: { [weak self] _ in
       guard let `self` = self else { return }
-      switch event {
-      case .next(_):
-        self.showNetworkAlert()
-      default:
-        return
-      }
+      self.showNetworkAlert()
     }).disposed(by: disposeBag)
   }
   
@@ -157,19 +152,20 @@ class HomeViewController: UIViewController {
     viewModel.fetchData()
     let width = UIScreen.main.bounds.width
     let layout = UICollectionViewFlowLayout()
-    layout.itemSize = CGSize(width: width / 2, height: 90)
+    layout.itemSize = CGSize(width: (width / 2) - 15, height: 90)
     layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     layout.scrollDirection = .horizontal
     
     collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
     collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    collectionView.showsHorizontalScrollIndicator = false
     
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints { (make) -> Void in
       make.bottom.equalToSuperview()
       make.width.equalToSuperview()
       make.centerX.equalToSuperview()
-      make.height.equalTo(80)
+      make.height.equalTo(100)
     }
     collectionView.backgroundColor = UIColor.veryLightGray
     viewModel.studies.asObservable()

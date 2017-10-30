@@ -26,10 +26,14 @@ class HomeViewModel: ViewModelProtocol {
       NetworkUtils.spinner.stop()
       switch event {
       case .next(let data):
-        if !self.studies.value.isEmpty {
-          self.studies.value.removeAll()
+        if data.isEmpty {
+          self.networkError.onNext(ResumeError.NetworkError)
+        } else {
+          if !self.studies.value.isEmpty {
+            self.studies.value.removeAll()
+          }
+          self.studies.value.append(contentsOf: data)
         }
-        self.studies.value.append(contentsOf: data)
       case .error(let error):
         self.networkError.onNext(error)
       case .completed:
