@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class Skill: Mappable {
+final class Skill: Mappable {
   var id = -1
   var name = ""
   var percentage = -1

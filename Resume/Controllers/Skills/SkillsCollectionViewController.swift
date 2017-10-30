@@ -12,7 +12,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class SkillsCollectionViewController: UIViewController {
+final class SkillsCollectionViewController: UIViewController {
   private let maxValue = 80
   private let reuseIdentifier = "SkillCell"
   private let disposeBag = DisposeBag()

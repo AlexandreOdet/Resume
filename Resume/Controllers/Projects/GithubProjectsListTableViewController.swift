@@ -12,7 +12,7 @@ import SnapKit
 import Alamofire
 import RxSwift
 
-class GithubProjectListTableViewController: UIViewController {
+final class GithubProjectListTableViewController: UIViewController {
   
   private let reuseIdentifier = "GithubProjectCell"
   private let disposeBag = DisposeBag()
@@ -39,6 +39,12 @@ class GithubProjectListTableViewController: UIViewController {
     super.viewDidLoad()
     setUpTableView()
     setRightButtonItem()
+    viewModel.requestFailure
+      .asDriver(onErrorJustReturn: ResumeError.unknownError)
+      .drive(onNext: { [weak self] _ in
+        guard let `self` = self else { return }
+        self.showNetworkAlert()
+      }).disposed(by: disposeBag)
   }
   
   private func setUpTableView() {
@@ -81,6 +87,18 @@ class GithubProjectListTableViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "Langage", style: .default, handler: {
       _ in
       self.viewModel.sort(by: .langage)
+    }))
+    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
+    present(alert, animated: true, completion: nil)
+  }
+  
+  func showNetworkAlert() {
+    let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
+      [weak self] _ in
+      guard let `self` = self else { return }
+      self.viewModel.fetchData()
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)

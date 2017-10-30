@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 import CircleProgressBar
 
-class SkillsCollectionViewCell: UICollectionViewCell {
+final class SkillsCollectionViewCell: UICollectionViewCell {
   private var skillNameLabel = UILabel()
   private var bottomView = UIView()
   private var circularProgressBar = CircleProgressBar()

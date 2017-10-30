@@ -11,7 +11,7 @@ import Alamofire
 import AlamofireObjectMapper
 import RxSwift
 
-class GithubAPICommunication: BaseAPICommunication {
+final class GithubAPICommunication: BaseAPICommunication {
   
   func fetchProjects() -> Observable<[GithubProject]> {
     return Observable<[GithubProject]>

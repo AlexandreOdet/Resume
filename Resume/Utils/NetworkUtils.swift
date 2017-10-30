@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import SystemConfiguration
 
-class NetworkUtils {
+final class NetworkUtils {
   
-  class spinner {
+  final class spinner {
     public class func start() {
       UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }

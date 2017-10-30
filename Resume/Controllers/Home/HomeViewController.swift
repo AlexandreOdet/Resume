@@ -12,7 +12,7 @@ import Alamofire
 import RxCocoa
 import RxSwift
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
   
   private let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
   private let disposeBag = DisposeBag()

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 
-class SkillsViewModel: ViewModelProtocol {
+final class SkillsViewModel: ViewModelProtocol {
   
   lazy var disposeBag = DisposeBag()
   

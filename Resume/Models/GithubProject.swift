@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class GithubProject: Mappable {
+final class GithubProject: Mappable {
   var projectName = ""
   var description = ""
   var language = ""

@@ -24,6 +24,8 @@ class ProjectViewModel: ViewModelProtocol {
       .catchErrorJustReturn([])
   }
   
+  var requestFailure: PublishSubject<Error> = PublishSubject()
+  
   func cancelRequest() {
     apiCommunication.cancelRequest()
   }

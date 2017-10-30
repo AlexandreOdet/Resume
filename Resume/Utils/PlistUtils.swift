@@ -8,8 +8,8 @@
 
 import Foundation
 
-class PlistUtils {
-  static func getGithubUrl() -> String? {
+final class PlistUtils {
+  public class func getGithubUrl() -> String? {
     let path = Bundle.main.path(forResource: "Network", ofType: "plist")
     guard let dict = NSDictionary(contentsOfFile: path!) else {
       return nil
@@ -17,7 +17,7 @@ class PlistUtils {
     return (dict.object(forKey: "github_url") as? String)
   }
   
-  static func getWebsiteUrl() -> String? {
+  public class func getWebsiteUrl() -> String? {
     let path = Bundle.main.path(forResource: "Network", ofType: "plist")
     guard let dict = NSDictionary(contentsOfFile: path!) else {
       return nil

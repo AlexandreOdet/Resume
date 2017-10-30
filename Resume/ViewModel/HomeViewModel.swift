@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class HomeViewModel: ViewModelProtocol {
+final class HomeViewModel: ViewModelProtocol {
   
   private let apiCommunication = WebsiteAPICommunication()
   private let disposeBag = DisposeBag()

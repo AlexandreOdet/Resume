@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class Study: Mappable {
+final class Study: Mappable {
   var id: Int!
   var school: String!
   var diploma: String?

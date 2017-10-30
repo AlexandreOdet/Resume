@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class GithubProjectListTableViewCell: UITableViewCell {
+final class GithubProjectListTableViewCell: UITableViewCell {
   var labelNameProject = UILabel()
   var labelDescriptionProject = UILabel()
   var labelProjectLanguage = UILabel()

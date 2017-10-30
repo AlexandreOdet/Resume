@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class HomeCollectionViewCell: UICollectionViewCell {
+final class HomeCollectionViewCell: UICollectionViewCell {
   
   var schoolNameLabel = UILabel()
   var diplomaLabel = UILabel()

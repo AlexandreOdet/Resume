@@ -12,7 +12,7 @@ import AlamofireObjectMapper
 import RxSwift
 import RxCocoa
 
-class WebsiteAPICommunication: BaseAPICommunication {
+final class WebsiteAPICommunication: BaseAPICommunication {
   func fetchSkills() -> Observable<[Skill]> {
     return Observable<[Skill]>
       .create({ observer -> Disposable in
