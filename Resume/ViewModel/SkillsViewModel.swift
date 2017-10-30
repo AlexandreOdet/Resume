@@ -39,7 +39,7 @@ final class SkillsViewModel: ViewModelProtocol {
       switch event {
       case .next(let data):
         if data.isEmpty {
-          self.error.onNext(ResumeError.networkError)
+          self.error.onNext(ResumeError.network)
         } else {
           self.skillsItems.value.removeAll()
           self.skillsItems.value.append(contentsOf: data.sorted(by: { $0.name < $1.name }))

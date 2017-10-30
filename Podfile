@@ -5,11 +5,12 @@ target 'Resume' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'Alamofire'
-  pod 'SnapKit', '~> 3.2.0'
+  pod 'SnapKit'
   pod 'ObjectMapper'
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'AlamofireObjectMapper'
-pod 'CircleProgressBar', '~> 0.32’  # Pods for Resume
+pod 'CircleProgressBar', '~> 0.32’
+# Pods for Resume
 
 end

@@ -1,5 +1,5 @@
 //
-//  Error.swift
+//  BindableProtocols.swift
 //  Resume
 //
 //  Created by Odet Alexandre on 30/10/2017.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-enum ResumeError: Error {
-  case network
-  case unknown
+protocol Bindable {
+  func setUpBindings()
 }

@@ -56,20 +56,6 @@ final class SkillsCollectionViewController: UIViewController {
     collectionView.backgroundColor = UIColor.veryLightGray
     setUpBindings()
   }
-
-  func setUpBindings() {
-    viewModel.observableSkills
-      .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: SkillsCollectionViewCell.self))
-      { _, element, cell in
-      cell.set(name: element.name)
-      cell.set(percentage: element.percentage)
-    }.disposed(by: disposeBag)
-    
-    viewModel.error.asDriver(onErrorJustReturn: ResumeError.unknownError).drive(onNext: { [weak self] _ in
-      guard let `self` = self else { return }
-      self.showNetworkAlert()
-    }).disposed(by: disposeBag)
-  }
   
   func showNetworkAlert() {
     let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
@@ -82,5 +68,20 @@ final class SkillsCollectionViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)
   }
-  
+}
+
+extension SkillsCollectionViewController: Bindable {
+  func setUpBindings() {
+    viewModel.observableSkills
+      .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: SkillsCollectionViewCell.self))
+      { _, element, cell in
+        cell.set(name: element.name)
+        cell.set(percentage: element.percentage)
+      }.disposed(by: disposeBag)
+    
+    viewModel.error.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
+      guard let `self` = self else { return }
+      self.showNetworkAlert()
+    }).disposed(by: disposeBag)
+  }
 }

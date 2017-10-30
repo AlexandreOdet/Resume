@@ -40,7 +40,7 @@ final class GithubProjectListTableViewController: UIViewController {
     setUpTableView()
     setRightButtonItem()
     viewModel.requestFailure
-      .asDriver(onErrorJustReturn: ResumeError.unknownError)
+      .asDriver(onErrorJustReturn: ResumeError.unknown)
       .drive(onNext: { [weak self] _ in
         guard let `self` = self else { return }
         self.showNetworkAlert()

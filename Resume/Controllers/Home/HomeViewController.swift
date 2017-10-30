@@ -38,30 +38,7 @@ final class HomeViewController: UIViewController {
     setUpBindings()
     setUpCollectionView()
   }
-  
-  func setUpBindings() {
-    viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.unknownError).drive(onNext: { [weak self] _ in
-      guard let `self` = self else { return }
-      self.showNetworkAlert()
-    }).disposed(by: disposeBag)
-  }
-  
-  func showNetworkAlert() {
-    let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
-      [weak self] _ in
-      guard let `self` = self else { return }
-      self.viewModel.fetchData()
-    }))
-    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
-    present(alert, animated: true, completion: nil)
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
+
   private func setUpView() {
     view.backgroundColor = UIColor.black
     
@@ -118,7 +95,7 @@ final class HomeViewController: UIViewController {
     let now = Date()
     let year = Calendar.current.component(.year, from: now)
     
-    ageLabel.text = "\(getDifferenceBetweenTwoYears(begin: 1993, end: year)) ans"
+    ageLabel.text = "\(year - 1993) ans"
     ageLabel.font = UIFont.boldSystemFont(ofSize: 15)
     ageLabel.textColor = UIColor.darkGray
     ageLabel.textAlignment = .center
@@ -181,9 +158,7 @@ final class HomeViewController: UIViewController {
         self.displayCannotMakeCallAlert()
       }
     }).disposed(by: disposeBag)
-    
     canMakeCall.asObservable().bind(to: phoneLabel.rx.isUserInteractionEnabled).disposed(by: disposeBag)
-    
   }
   
   private func getDifferenceBetweenTwoYears(begin: Int, end: Int) -> Int {
@@ -252,6 +227,25 @@ final class HomeViewController: UIViewController {
         }
         cell.datesLabel.text = "Du \(element.begin!)  au \(element.end!)"
       }.disposed(by: disposeBag)
+    
+    let jobsLabel = UILabel()
+    view.addSubview(jobsLabel)
+    jobsLabel.snp.makeConstraints { (make) -> Void in
+      make.bottom.equalTo(collectionView.snp.top).offset(-10)
+      make.width.equalToSuperview()
+      make.height.equalTo(30)
+    }
+    jobsLabel.text = "Mes expériences professionnelles"
+    jobsLabel.textAlignment = .center
+    jobsLabel.isUserInteractionEnabled = true
+    
+    let tapGesture = UITapGestureRecognizer()
+    jobsLabel.addGestureRecognizer(tapGesture)
+    tapGesture.rx.event.bind(onNext: {
+      [unowned self] _ in
+      let nextViewController = WorksTableViewController()
+      self.navigationController?.pushViewController(nextViewController, animated: true)
+    }).disposed(by: disposeBag)
   }
 }
 
@@ -272,6 +266,27 @@ extension HomeViewController {
       self.canMakeCall.value = false
     }))
     present(alert, animated: true, completion: nil)
+  }
+  
+  func showNetworkAlert() {
+    let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
+      [weak self] _ in
+      guard let `self` = self else { return }
+      self.viewModel.fetchData()
+    }))
+    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
+    present(alert, animated: true, completion: nil)
+  }
+}
+
+extension HomeViewController: Bindable {
+  func setUpBindings() {
+    viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
+      guard let `self` = self else { return }
+      self.showNetworkAlert()
+    }).disposed(by: disposeBag)
   }
 }
 

@@ -17,21 +17,27 @@ class WorksViewModel: ViewModelProtocol {
   
   var requestFailure: PublishSubject<Error> = PublishSubject()
   
-  var works: Driver<[Work]> = Driver.empty()
+  var works = Variable<[Work]>([])
   
   func cancelRequest() {
     apiCommunication.cancelRequest()
   }
   
   func fetchData() {
+    NetworkUtils.spinner.start()
     apiCommunication.fetchWorks().subscribe({ [weak self] event in
       guard let `self` = self else { return }
+      NetworkUtils.spinner.stop()
+      print(event.event)
       switch event {
       case .next(let data):
         if data.isEmpty {
-          self.requestFailure.onNext(ResumeError.networkError)
+          self.requestFailure.onNext(ResumeError.network)
         } else {
-          self.works = Driver.from(optional: data)
+          if !self.works.value.isEmpty {
+            self.works.value.removeAll()
+          }
+          self.works.value.append(contentsOf: data)
         }
       case .completed:
         return
