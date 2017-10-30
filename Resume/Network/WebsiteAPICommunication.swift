@@ -31,11 +31,10 @@ class WebsiteAPICommunication: BaseAPICommunication {
         return Disposables.create(with: {
           self.request?.cancel()
         })
-      })
+      }).catchErrorJustReturn([])
   }
   
   func fetchStudies() -> Observable<[Study]> {
-    print("URL = \(HTTPRouter.studies.url)")
     return Observable<[Study]>
       .create({ observer -> Disposable in
         self.request = Alamofire.request(HTTPRouter.studies.url)
@@ -53,6 +52,6 @@ class WebsiteAPICommunication: BaseAPICommunication {
         return Disposables.create(with: {
           self.request?.cancel()
         })
-      })
+      }).catchErrorJustReturn([])
   }
 }

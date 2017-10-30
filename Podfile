@@ -7,9 +7,11 @@ target 'Resume' do
   pod 'Alamofire'
   pod 'SnapKit', '~> 3.2.0'
   pod 'ObjectMapper'
-  pod 'AlamofireObjectMapper'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Moya'
+  pod 'AlamofireObjectMapper'
+  pod 'Moya/RxSwift'
 pod 'CircleProgressBar', '~> 0.32’  # Pods for Resume
 
 end
