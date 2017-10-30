@@ -35,7 +35,7 @@ class HomeViewController: UIViewController {
   }
   
   func setUpBindings() {
-    viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.UnknownError).drive(onNext: { [weak self] _ in
+    viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.unknownError).drive(onNext: { [weak self] _ in
       guard let `self` = self else { return }
       self.showNetworkAlert()
     }).disposed(by: disposeBag)

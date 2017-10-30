@@ -27,7 +27,7 @@ class HomeViewModel: ViewModelProtocol {
       switch event {
       case .next(let data):
         if data.isEmpty {
-          self.networkError.onNext(ResumeError.NetworkError)
+          self.networkError.onNext(ResumeError.networkError)
         } else {
           if !self.studies.value.isEmpty {
             self.studies.value.removeAll()

@@ -64,6 +64,23 @@ class SkillsCollectionViewController: UIViewController {
       cell.set(name: element.name)
       cell.set(percentage: element.percentage)
     }.disposed(by: disposeBag)
+    
+    viewModel.error.asDriver(onErrorJustReturn: ResumeError.unknownError).drive(onNext: { [weak self] _ in
+      guard let `self` = self else { return }
+      self.showNetworkAlert()
+    }).disposed(by: disposeBag)
+  }
+  
+  func showNetworkAlert() {
+    let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
+      [weak self] _ in
+      guard let `self` = self else { return }
+      self.viewModel.fetchData()
+    }))
+    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
+    present(alert, animated: true, completion: nil)
   }
   
 }

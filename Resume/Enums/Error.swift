@@ -9,6 +9,6 @@
 import Foundation
 
 enum ResumeError: Error {
-  case NetworkError
-  case UnknownError
+  case networkError
+  case unknownError
 }

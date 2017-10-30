@@ -25,6 +25,8 @@ class SkillsViewModel: ViewModelProtocol {
       .catchErrorJustReturn([])
   }
   
+  var error: PublishSubject<Error> = PublishSubject()
+  
   func cancelRequest() {
     apiCommunication.cancelRequest()
   }
@@ -35,12 +37,15 @@ class SkillsViewModel: ViewModelProtocol {
       guard let `self` = self else { return }
       NetworkUtils.spinner.stop()
       switch event {
-      case .next(var data):
-        self.skillsItems.value.removeAll()
-        data = data.sorted(by: { $0.name < $1.name })
-        self.skillsItems.value.append(contentsOf: data)
+      case .next(let data):
+        if data.isEmpty {
+          self.error.onNext(ResumeError.networkError)
+        } else {
+          self.skillsItems.value.removeAll()
+          self.skillsItems.value.append(contentsOf: data.sorted(by: { $0.name < $1.name }))
+        }
       case .error(let error):
-        print("\(error)")
+        self.error.onNext(error)
         return
       case .completed:
         return
