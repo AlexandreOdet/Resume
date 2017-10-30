@@ -36,6 +36,7 @@
 		FAE00A441EA8569500C121C1 /* GithubProjectListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE00A431EA8569500C121C1 /* GithubProjectListTableViewCell.swift */; };
 		FAE2C6211E8C7D31006FE6C3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */; };
 		FAE9831B1FA71E2400F3B46A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9831A1FA71E2400F3B46A /* Error.swift */; };
+		FAE9831D1FA73ABB00F3B46A /* Work.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9831C1FA73ABB00F3B46A /* Work.swift */; };
 		FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		FAE00A431EA8569500C121C1 /* GithubProjectListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubProjectListTableViewCell.swift; path = Controllers/Projects/CustomCell/GithubProjectListTableViewCell.swift; sourceTree = "<group>"; };
 		FAE2C6201E8C7D31006FE6C3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Extensions/UIImageView.swift; sourceTree = "<group>"; };
 		FAE9831A1FA71E2400F3B46A /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Enums/Error.swift; sourceTree = "<group>"; };
+		FAE9831C1FA73ABB00F3B46A /* Work.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Work.swift; path = Models/Work.swift; sourceTree = "<group>"; };
 		FAFBC2DE1E986334009D1F9D /* GithubAPICommunication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubAPICommunication.swift; path = Network/GithubAPICommunication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +251,7 @@
 				FACB63761E95C3A500EEBB02 /* GithubProject.swift */,
 				FA6BC13D1EA2AA5A00AF3432 /* Skill.swift */,
 				FA7495191FA07C7900BF502E /* Study.swift */,
+				FAE9831C1FA73ABB00F3B46A /* Work.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 			files = (
 				FA4A81121E969B3A000E3AFA /* PlistUtils.swift in Sources */,
 				FAACB8FC1F9F8337000AD33F /* UIColor.swift in Sources */,
+				FAE9831D1FA73ABB00F3B46A /* Work.swift in Sources */,
 				FAE00A441EA8569500C121C1 /* GithubProjectListTableViewCell.swift in Sources */,
 				FA6BC13E1EA2AA5A00AF3432 /* Skill.swift in Sources */,
 				FA74951C1FA07ECE00BF502E /* HomeViewModel.swift in Sources */,

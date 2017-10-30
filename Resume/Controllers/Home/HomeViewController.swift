@@ -23,6 +23,7 @@ final class HomeViewController: UIViewController {
   private let reuseIdentifier = "HomeCollectionViewCell"
   
   var canSendMail: Variable<Bool> = Variable(true)
+  var canMakeCall: Variable<Bool> = Variable(true)
   
   var collectionView: UICollectionView!
   
@@ -159,6 +160,30 @@ final class HomeViewController: UIViewController {
         self.displayCannotSendMailErrorAlert()
       }
     }).disposed(by: disposeBag)
+    
+    let phoneLabel = UILabel()
+    view.addSubview(phoneLabel)
+    phoneLabel.snp.makeConstraints { (make) -> Void in
+      make.top.equalTo(mailLabel.snp.bottom).offset(10)
+      make.trailing.equalTo(mailLabel)
+      make.leading.equalTo(mailLabel)
+    }
+    phoneLabel.text = "07 87 68 69 21"
+    phoneLabel.adjustsFontSizeToFitWidth = true
+    
+    let phoneGestureRecognizer = UITapGestureRecognizer()
+    phoneLabel.addGestureRecognizer(phoneGestureRecognizer)
+    
+    phoneGestureRecognizer.rx.event.bind(onNext: { _ in
+      if let url = URL(string: "tel://0787686921"), UIApplication.shared.canOpenURL(url) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+      } else {
+        self.displayCannotMakeCallAlert()
+      }
+    }).disposed(by: disposeBag)
+    
+    canMakeCall.asObservable().bind(to: phoneLabel.rx.isUserInteractionEnabled).disposed(by: disposeBag)
+    
   }
   
   private func getDifferenceBetweenTwoYears(begin: Int, end: Int) -> Int {
@@ -169,7 +194,7 @@ final class HomeViewController: UIViewController {
     let rightButton = UIBarButtonItem(title: "Mes compétences",
                                       style: .plain, target: self,
                                       action: nil)
-
+    
     rightButton.rx.tap.subscribe(onNext: { [unowned self] in
       let nextViewController = SkillsCollectionViewController()
       self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -224,7 +249,7 @@ final class HomeViewController: UIViewController {
           cell.diplomaLabel.text = "Pas de diplome"
         }
         cell.datesLabel.text = "Du \(element.begin!)  au \(element.end!)"
-    }.disposed(by: disposeBag)
+      }.disposed(by: disposeBag)
   }
   
   func displayCannotSendMailErrorAlert() {
@@ -232,6 +257,15 @@ final class HomeViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
       _ in
       self.canSendMail.value = false
+    }))
+    present(alert, animated: true, completion: nil)
+  }
+  
+  func displayCannotMakeCallAlert() {
+    let alert = UIAlertController(title: "Oops", message: "Seems like your device can't make a call !", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+      _ in
+      self.canMakeCall.value = false
     }))
     present(alert, animated: true, completion: nil)
   }
