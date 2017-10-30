@@ -9,9 +9,7 @@ target 'Resume' do
   pod 'ObjectMapper'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'Moya'
   pod 'AlamofireObjectMapper'
-  pod 'Moya/RxSwift'
 pod 'CircleProgressBar', '~> 0.32’  # Pods for Resume
 
 end

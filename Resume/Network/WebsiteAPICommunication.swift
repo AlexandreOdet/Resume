@@ -32,6 +32,7 @@ final class WebsiteAPICommunication: BaseAPICommunication {
           self.request?.cancel()
         })
       }).catchErrorJustReturn([])
+    .observeOn(MainScheduler.instance)
   }
   
   func fetchStudies() -> Observable<[Study]> {
@@ -53,5 +54,30 @@ final class WebsiteAPICommunication: BaseAPICommunication {
           self.request?.cancel()
         })
       }).catchErrorJustReturn([])
+    .observeOn(MainScheduler.instance)
   }
+  
+  func fetchWorks() -> Observable<[Work]> {
+    return Observable<[Work]>
+      .create({ observer -> Disposable in
+        self.request = Alamofire.request(HTTPRouter.works.url)
+        .validate()
+          .responseArray(completionHandler: {
+            (response: DataResponse<[Work]>) in
+            switch response.result {
+            case .success(let works):
+              observer.onNext(works)
+              observer.onCompleted()
+            case .failure(let error):
+              print("\(self).\(#function).observer(onError: \(error))")
+              observer.onError(error)
+            }
+          })
+        return Disposables.create(with: {
+          self.request?.cancel()
+        })
+      }).catchErrorJustReturn([])
+      .observeOn(MainScheduler.instance)
+  }
+  
 }

@@ -15,6 +15,7 @@ enum HTTPRouter {
   case skills
   case experiences
   case studies
+  case works
   
   var url: String {
     let path: String = {
@@ -25,6 +26,8 @@ enum HTTPRouter {
         return "/competences"
       case .studies:
         return "/studies"
+      case .works:
+        return "/works"
       }
     }()
     return (HTTPRouter.baseUrl!.appending(path).appending(HTTPRouter.jsonExt))

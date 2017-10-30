@@ -216,6 +216,7 @@ final class HomeViewController: UIViewController {
   
   private func setUpCollectionView() {
     viewModel.fetchData()
+    
     let width = UIScreen.main.bounds.width
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = CGSize(width: (width / 2) - 15, height: 90)
@@ -225,6 +226,7 @@ final class HomeViewController: UIViewController {
     collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
     collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     collectionView.showsHorizontalScrollIndicator = false
+    collectionView.backgroundColor = UIColor.veryLightGray
     
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints { (make) -> Void in
@@ -233,7 +235,7 @@ final class HomeViewController: UIViewController {
       make.centerX.equalToSuperview()
       make.height.equalTo(100)
     }
-    collectionView.backgroundColor = UIColor.veryLightGray
+
     viewModel.studies.asObservable()
       .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: HomeCollectionViewCell.self)) {
         row, element, cell in
@@ -251,7 +253,9 @@ final class HomeViewController: UIViewController {
         cell.datesLabel.text = "Du \(element.begin!)  au \(element.end!)"
       }.disposed(by: disposeBag)
   }
-  
+}
+
+extension HomeViewController {
   func displayCannotSendMailErrorAlert() {
     let alert = UIAlertController(title: "Oops", message: "Seems like your device can't send e-mail !", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
@@ -269,7 +273,6 @@ final class HomeViewController: UIViewController {
     }))
     present(alert, animated: true, completion: nil)
   }
-  
 }
 
 extension HomeViewController: MFMailComposeViewControllerDelegate {
