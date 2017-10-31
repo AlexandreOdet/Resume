@@ -22,13 +22,13 @@ final class GithubProjectListTableViewController: UIViewController {
   var tableView: UITableView!
   
   deinit {
-    viewModel.cancelRequest()
+    viewModel.shouldLoadData.onNext(false)
   }
   
   init() {
     super.init(nibName: nil, bundle: Bundle.main)
     viewModel = ProjectViewModel()
-    viewModel.shouldRefresh.value = true
+    viewModel.shouldLoadData.onNext(true)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -73,15 +73,15 @@ final class GithubProjectListTableViewController: UIViewController {
     let alert = UIAlertController(title: "Trier par", message: nil, preferredStyle: .actionSheet)
     alert.addAction(UIAlertAction(title: "Ordre ascendant", style: .default, handler: {
       [unowned self] _ in
-      self.viewModel.sortType.value = .ascOrder
+      self.viewModel.sortType.onNext(.ascOrder)
     }))
     alert.addAction(UIAlertAction(title: "Ordre descendant", style: .default, handler: {
       [unowned self] _ in
-      self.viewModel.sortType.value = .descOrder
+      self.viewModel.sortType.onNext(.descOrder)
     }))
     alert.addAction(UIAlertAction(title: "Langage", style: .default, handler: {
       [unowned self] _ in
-      self.viewModel.sortType.value = .langage
+      self.viewModel.sortType.onNext(.langage)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)
@@ -93,7 +93,7 @@ final class GithubProjectListTableViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
       [weak self] _ in
       guard let `self` = self else { return }
-      self.viewModel.shouldRefresh.value = true
+      self.viewModel.shouldLoadData.onNext(true)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)

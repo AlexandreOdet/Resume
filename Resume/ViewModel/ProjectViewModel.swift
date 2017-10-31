@@ -18,26 +18,21 @@ class ProjectViewModel: ViewModelProtocol {
   
   var items = Variable<[GithubProject]>([])
   
-  var sortType = Variable<SortType>(.ascOrder)
+  var sortType: PublishSubject<SortType> = PublishSubject()
   
-  var observableSortType: Observable<SortType> {
-    return sortType.asObservable()
-  }
-  
-  var shouldRefresh = Variable<Bool>(false)
+  var shouldLoadData: PublishSubject<Bool> = PublishSubject()
   
   init() {
-    observableSortType.subscribe(onNext: {
-      type in
+    sortType.subscribe(onNext: {
+      [unowned self] type in
       self.sort(by: type)
     }).disposed(by: disposeBag)
     
-    shouldRefresh.asObservable().subscribe(onNext: {
-      bool in
-      if bool {
-        self.fetchData()
-      }
+    shouldLoadData.subscribe(onNext: {
+      [unowned self] shouldLoad in
+      (shouldLoad) ? self.fetchData() : self.cancelRequest()
     }).disposed(by: disposeBag)
+    
   }
   
   var observableItems: Observable<[GithubProject]> {
