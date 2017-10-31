@@ -51,7 +51,7 @@ extension WorksTableViewController: Bindable {
   func setUpBindings() {
     viewModel.requestFailure.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
       guard let `self` = self else { return }
-      self.displayNetworkError()
+      self.displayNetworkErrorAlert()
     }).disposed(by: disposeBag)
     
     viewModel.works.asObservable().bind(to: tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: WorksTableViewCell.self)) {
@@ -60,8 +60,10 @@ extension WorksTableViewController: Bindable {
       cell.detailTextLabel?.text = element.role!
     }.disposed(by: disposeBag)
   }
-  
-  func displayNetworkError() {
+}
+
+extension WorksTableViewController: Alertable {
+  func displayNetworkErrorAlert() {
     let alert = UIAlertController(title: "Oops", message: "Il semble que quelque chose ce soit mal passé.", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
     alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {

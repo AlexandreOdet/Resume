@@ -134,7 +134,7 @@ final class HomeViewController: UIViewController {
       if MFMailComposeViewController.canSendMail() {
         self.present(mailViewController, animated: true, completion: nil)
       } else {
-        self.displayCannotSendMailErrorAlert()
+        self.displayMailErrorAlert()
       }
     }).disposed(by: disposeBag)
     
@@ -155,7 +155,7 @@ final class HomeViewController: UIViewController {
       if let url = URL(string: "tel://0787686921"), UIApplication.shared.canOpenURL(url) {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
       } else {
-        self.displayCannotMakeCallAlert()
+        self.displayPhoneCallErrorAlert()
       }
     }).disposed(by: disposeBag)
     canMakeCall.asObservable().bind(to: phoneLabel.rx.isUserInteractionEnabled).disposed(by: disposeBag)
@@ -249,8 +249,17 @@ final class HomeViewController: UIViewController {
   }
 }
 
-extension HomeViewController {
-  func displayCannotSendMailErrorAlert() {
+extension HomeViewController: Bindable {
+  func setUpBindings() {
+    viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
+      guard let `self` = self else { return }
+      self.displayNetworkErrorAlert()
+    }).disposed(by: disposeBag)
+  }
+}
+
+extension HomeViewController: Alertable {
+  func displayMailErrorAlert() {
     let alert = UIAlertController(title: "Oops", message: "Seems like your device can't send e-mail !", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
       _ in
@@ -259,16 +268,7 @@ extension HomeViewController {
     present(alert, animated: true, completion: nil)
   }
   
-  func displayCannotMakeCallAlert() {
-    let alert = UIAlertController(title: "Oops", message: "Seems like your device can't make a call !", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-      _ in
-      self.canMakeCall.value = false
-    }))
-    present(alert, animated: true, completion: nil)
-  }
-  
-  func showNetworkAlert() {
+  func displayNetworkErrorAlert() {
     let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
     alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
@@ -279,14 +279,14 @@ extension HomeViewController {
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)
   }
-}
-
-extension HomeViewController: Bindable {
-  func setUpBindings() {
-    viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
-      guard let `self` = self else { return }
-      self.showNetworkAlert()
-    }).disposed(by: disposeBag)
+  
+  func displayPhoneCallErrorAlert() {
+    let alert = UIAlertController(title: "Oops", message: "Seems like your device can't make a call !", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+      _ in
+      self.canMakeCall.value = false
+    }))
+    present(alert, animated: true, completion: nil)
   }
 }
 

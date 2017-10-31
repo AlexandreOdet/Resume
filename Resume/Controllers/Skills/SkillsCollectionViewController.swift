@@ -56,18 +56,6 @@ final class SkillsCollectionViewController: UIViewController {
     collectionView.backgroundColor = UIColor.veryLightGray
     setUpBindings()
   }
-  
-  func showNetworkAlert() {
-    let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
-      [weak self] _ in
-      guard let `self` = self else { return }
-      self.viewModel.shouldLoadData.onNext(true)
-    }))
-    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
-    present(alert, animated: true, completion: nil)
-  }
 }
 
 extension SkillsCollectionViewController: Bindable {
@@ -81,7 +69,21 @@ extension SkillsCollectionViewController: Bindable {
     
     viewModel.error.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
       guard let `self` = self else { return }
-      self.showNetworkAlert()
+      self.displayNetworkErrorAlert()
     }).disposed(by: disposeBag)
+  }
+}
+
+extension SkillsCollectionViewController: Alertable {
+  func displayNetworkErrorAlert() {
+    let alert = UIAlertController(title: "Erreur", message: "Oups ! Il semble que quelque chose se soit mal passé :(.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
+      [weak self] _ in
+      guard let `self` = self else { return }
+      self.viewModel.shouldLoadData.onNext(true)
+    }))
+    alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
+    present(alert, animated: true, completion: nil)
   }
 }

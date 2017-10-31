@@ -29,6 +29,7 @@
 		FA74951A1FA07C7900BF502E /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7495191FA07C7900BF502E /* Study.swift */; };
 		FA74951C1FA07ECE00BF502E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74951B1FA07ECE00BF502E /* HomeViewModel.swift */; };
 		FA7495211FA07FE700BF502E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7495201FA07FE700BF502E /* HomeViewController.swift */; };
+		FA9077A21FA8C52300D0E9A7 /* AlertableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9077A11FA8C52300D0E9A7 /* AlertableProtocol.swift */; };
 		FAACB8F31F9F7105000AD33F /* SkillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACB8F21F9F7105000AD33F /* SkillsViewModel.swift */; };
 		FAACB8F51F9F72D7000AD33F /* BaseAPICommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACB8F41F9F72D7000AD33F /* BaseAPICommunication.swift */; };
 		FAACB8F71F9F737F000AD33F /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACB8F61F9F737F000AD33F /* ProjectViewModel.swift */; };
@@ -71,6 +72,7 @@
 		FA7495191FA07C7900BF502E /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Study.swift; path = Models/Study.swift; sourceTree = "<group>"; };
 		FA74951B1FA07ECE00BF502E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = ViewModel/HomeViewModel.swift; sourceTree = "<group>"; };
 		FA7495201FA07FE700BF502E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/Home/HomeViewController.swift; sourceTree = "<group>"; };
+		FA9077A11FA8C52300D0E9A7 /* AlertableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlertableProtocol.swift; path = Protocols/AlertableProtocol.swift; sourceTree = "<group>"; };
 		FAACB8F21F9F7105000AD33F /* SkillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SkillsViewModel.swift; path = ViewModel/SkillsViewModel.swift; sourceTree = "<group>"; };
 		FAACB8F41F9F72D7000AD33F /* BaseAPICommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseAPICommunication.swift; path = Network/BaseAPICommunication.swift; sourceTree = "<group>"; };
 		FAACB8F61F9F737F000AD33F /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProjectViewModel.swift; path = ViewModel/ProjectViewModel.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				FAACB8F91F9F821C000AD33F /* ViewModelProtocol.swift */,
 				FA18606C1FA77DF1006B4B1C /* BindableProtocol.swift */,
+				FA9077A11FA8C52300D0E9A7 /* AlertableProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				FA7495211FA07FE700BF502E /* HomeViewController.swift in Sources */,
 				FAFBC2DF1E986334009D1F9D /* GithubAPICommunication.swift in Sources */,
 				FA74951A1FA07C7900BF502E /* Study.swift in Sources */,
+				FA9077A21FA8C52300D0E9A7 /* AlertableProtocol.swift in Sources */,
 				FA3CC7781E8C65B3002CE7B3 /* AppDelegate.swift in Sources */,
 				FA1860701FA788B7006B4B1C /* WorksTableViewCell.swift in Sources */,
 				FAACB8F51F9F72D7000AD33F /* BaseAPICommunication.swift in Sources */,
