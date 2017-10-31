@@ -18,6 +18,28 @@ class ProjectViewModel: ViewModelProtocol {
   
   var items = Variable<[GithubProject]>([])
   
+  var sortType = Variable<SortType>(.ascOrder)
+  
+  var observableSortType: Observable<SortType> {
+    return sortType.asObservable()
+  }
+  
+  var shouldRefresh = Variable<Bool>(false)
+  
+  init() {
+    observableSortType.subscribe(onNext: {
+      type in
+      self.sort(by: type)
+    }).disposed(by: disposeBag)
+    
+    shouldRefresh.asObservable().subscribe(onNext: {
+      bool in
+      if bool {
+        self.fetchData()
+      }
+    }).disposed(by: disposeBag)
+  }
+  
   var observableItems: Observable<[GithubProject]> {
     return items
       .asObservable()
@@ -30,32 +52,38 @@ class ProjectViewModel: ViewModelProtocol {
     apiCommunication.cancelRequest()
   }
   
-  func fetchData() {
+  internal func fetchData() {
     NetworkUtils.spinner.start()
     apiCommunication.fetchProjects().subscribe({ [weak self] event -> Void in
       NetworkUtils.spinner.stop()
       guard let `self` = self else { return }
       switch event {
       case .next(let projects):
-        self.items.value.removeAll()
-        self.items.value.append(contentsOf: projects)
+        if projects.isEmpty {
+          self.requestFailure.onNext(ResumeError.network)
+        } else {
+          self.items.value.removeAll()
+          self.items.value.append(contentsOf: projects)
+        }
       case .completed:
         return
       case .error(let error):
-        print("\(error)")
-        return
+        self.requestFailure.onNext(error)
       }
     }).disposed(by: disposeBag)
   }
   
-  func sort(by type: SortType) {
+  private func sort(by type: SortType) {
     switch type {
     case .ascOrder:
       items.value = items.value.sorted(by: { $0.projectName < $1.projectName })
+      return
     case .descOrder:
       items.value = items.value.sorted(by: { $0.projectName > $1.projectName })
+      return
     case .langage:
       items.value = items.value.sorted(by: {$0.language < $1.language })
+      return
     }
   }
 }

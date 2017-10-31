@@ -69,7 +69,6 @@ final class WebsiteAPICommunication: BaseAPICommunication {
               observer.onNext(works)
               observer.onCompleted()
             case .failure(let error):
-              print("\(self).\(#function).observer(onError: \(error))")
               observer.onError(error)
             }
           })

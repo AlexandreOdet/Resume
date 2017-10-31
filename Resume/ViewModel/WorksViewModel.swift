@@ -28,7 +28,6 @@ class WorksViewModel: ViewModelProtocol {
     apiCommunication.fetchWorks().subscribe({ [weak self] event in
       guard let `self` = self else { return }
       NetworkUtils.spinner.stop()
-      print(event.event)
       switch event {
       case .next(let data):
         if data.isEmpty {

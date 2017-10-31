@@ -28,7 +28,7 @@ final class GithubProjectListTableViewController: UIViewController {
   init() {
     super.init(nibName: nil, bundle: Bundle.main)
     viewModel = ProjectViewModel()
-    viewModel.fetchData()
+    viewModel.shouldRefresh.value = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -37,14 +37,9 @@ final class GithubProjectListTableViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setUpBindings()
     setUpTableView()
     setRightButtonItem()
-    viewModel.requestFailure
-      .asDriver(onErrorJustReturn: ResumeError.unknown)
-      .drive(onNext: { [weak self] _ in
-        guard let `self` = self else { return }
-        self.showNetworkAlert()
-      }).disposed(by: disposeBag)
   }
   
   private func setUpTableView() {
@@ -77,16 +72,16 @@ final class GithubProjectListTableViewController: UIViewController {
   func sortButtonTarget() {
     let alert = UIAlertController(title: "Trier par", message: nil, preferredStyle: .actionSheet)
     alert.addAction(UIAlertAction(title: "Ordre ascendant", style: .default, handler: {
-      _ in
-      self.viewModel.sort(by: .ascOrder)
+      [unowned self] _ in
+      self.viewModel.sortType.value = .ascOrder
     }))
     alert.addAction(UIAlertAction(title: "Ordre descendant", style: .default, handler: {
-      _ in
-      self.viewModel.sort(by: .descOrder)
+      [unowned self] _ in
+      self.viewModel.sortType.value = .descOrder
     }))
     alert.addAction(UIAlertAction(title: "Langage", style: .default, handler: {
-      _ in
-      self.viewModel.sort(by: .langage)
+      [unowned self] _ in
+      self.viewModel.sortType.value = .langage
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)
@@ -98,9 +93,20 @@ final class GithubProjectListTableViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
       [weak self] _ in
       guard let `self` = self else { return }
-      self.viewModel.fetchData()
+      self.viewModel.shouldRefresh.value = true
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)
+  }
+}
+
+extension GithubProjectListTableViewController: Bindable {
+  func setUpBindings() {
+    viewModel.requestFailure
+      .asDriver(onErrorJustReturn: ResumeError.unknown)
+      .drive(onNext: { [weak self] _ in
+        guard let `self` = self else { return }
+        self.showNetworkAlert()
+      }).disposed(by: disposeBag)
   }
 }
