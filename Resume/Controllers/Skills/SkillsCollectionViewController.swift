@@ -23,13 +23,13 @@ final class SkillsCollectionViewController: UIViewController {
   var viewModel: SkillsViewModel!
   
   deinit {
-    viewModel.cancelRequest()
+    viewModel.shouldLoadData.onNext(false)
   }
   
   init() {
     super.init(nibName: nil, bundle: Bundle.main)
     viewModel = SkillsViewModel()
-    viewModel.fetchData()
+    viewModel.shouldLoadData.onNext(true)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -63,7 +63,7 @@ final class SkillsCollectionViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
       [weak self] _ in
       guard let `self` = self else { return }
-      self.viewModel.fetchData()
+      self.viewModel.shouldLoadData.onNext(true)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)

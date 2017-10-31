@@ -22,6 +22,14 @@ class ProjectViewModel: ViewModelProtocol {
   
   var shouldLoadData: PublishSubject<Bool> = PublishSubject()
   
+  var requestFailure: PublishSubject<Error> = PublishSubject()
+  
+  var observableItems: Observable<[GithubProject]> {
+    return items
+      .asObservable()
+      .catchErrorJustReturn([])
+  }
+  
   init() {
     sortType.subscribe(onNext: {
       [unowned self] type in
@@ -35,15 +43,7 @@ class ProjectViewModel: ViewModelProtocol {
     
   }
   
-  var observableItems: Observable<[GithubProject]> {
-    return items
-      .asObservable()
-      .catchErrorJustReturn([])
-  }
-  
-  var requestFailure: PublishSubject<Error> = PublishSubject()
-  
-  func cancelRequest() {
+  internal func cancelRequest() {
     apiCommunication.cancelRequest()
   }
   
@@ -57,7 +57,9 @@ class ProjectViewModel: ViewModelProtocol {
         if projects.isEmpty {
           self.requestFailure.onNext(ResumeError.network)
         } else {
-          self.items.value.removeAll()
+          if !self.items.value.isEmpty {
+            self.items.value.removeAll()
+          }
           self.items.value.append(contentsOf: projects)
         }
       case .completed:
@@ -72,13 +74,10 @@ class ProjectViewModel: ViewModelProtocol {
     switch type {
     case .ascOrder:
       items.value = items.value.sorted(by: { $0.projectName < $1.projectName })
-      return
     case .descOrder:
       items.value = items.value.sorted(by: { $0.projectName > $1.projectName })
-      return
     case .langage:
       items.value = items.value.sorted(by: {$0.language < $1.language })
-      return
     }
   }
 }

@@ -20,6 +20,10 @@ class WorksTableViewController: UIViewController {
   
   var tableView: UITableView!
   
+  deinit {
+     viewModel.shouldLoadData.onNext(false)
+  }
+  
   init() {
     super.init(nibName: nil, bundle: Bundle.main)
   }
@@ -39,7 +43,7 @@ class WorksTableViewController: UIViewController {
       make.edges.equalToSuperview()
     }
     setUpBindings()
-    viewModel.fetchData()
+    viewModel.shouldLoadData.onNext(true)
   }
 }
 
@@ -62,7 +66,7 @@ extension WorksTableViewController: Bindable {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
     alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
       [unowned self] _ in
-      self.viewModel.fetchData()
+      self.viewModel.shouldLoadData.onNext(true)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)

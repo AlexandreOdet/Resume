@@ -18,8 +18,16 @@ final class HomeViewModel: ViewModelProtocol {
   var studies = Variable<[Study]>([])
   
   var networkError: PublishSubject<Error> = PublishSubject()
+  var shouldLoadData: PublishSubject<Bool> = PublishSubject()
   
-  func fetchData() {
+  init() {
+    shouldLoadData.subscribe(onNext: {
+      [unowned self] shouldLoad in
+      (shouldLoad) ? self.fetchData() : self.cancelRequest()
+    }).disposed(by: disposeBag)
+  }
+  
+  internal func fetchData() {
     NetworkUtils.spinner.start()
     apiCommunication.fetchStudies().subscribe({ [weak self] event in
       guard let `self` = self else { return }
@@ -42,7 +50,7 @@ final class HomeViewModel: ViewModelProtocol {
     }).disposed(by: disposeBag)
   }
   
-  func cancelRequest() {
+  internal func cancelRequest() {
     apiCommunication.cancelRequest()
   }
 }

@@ -28,7 +28,7 @@ final class HomeViewController: UIViewController {
   var collectionView: UICollectionView!
   
   deinit {
-    viewModel.cancelRequest()
+    viewModel.shouldLoadData.onNext(false)
   }
   
   override func viewDidLoad() {
@@ -190,7 +190,7 @@ final class HomeViewController: UIViewController {
   }
   
   private func setUpCollectionView() {
-    viewModel.fetchData()
+    viewModel.shouldLoadData.onNext(true)
     
     let width = UIScreen.main.bounds.width
     let layout = UICollectionViewFlowLayout()
@@ -274,7 +274,7 @@ extension HomeViewController {
     alert.addAction(UIAlertAction(title: "Réessayer", style: .default, handler: {
       [weak self] _ in
       guard let `self` = self else { return }
-      self.viewModel.fetchData()
+      self.viewModel.shouldLoadData.onNext(true)
     }))
     alert.addAction(UIAlertAction(title: "Annuler", style: .destructive, handler: nil))
     present(alert, animated: true, completion: nil)

@@ -16,14 +16,22 @@ class WorksViewModel: ViewModelProtocol {
   private let disposeBag = DisposeBag()
   
   var requestFailure: PublishSubject<Error> = PublishSubject()
+  var shouldLoadData: PublishSubject<Bool> = PublishSubject()
   
   var works = Variable<[Work]>([])
   
-  func cancelRequest() {
+  init() {
+    shouldLoadData.subscribe(onNext: {
+      [unowned self] shouldLoad in
+      (shouldLoad) ? self.fetchData() : self.cancelRequest()
+    }).disposed(by: disposeBag)
+  }
+  
+  internal func cancelRequest() {
     apiCommunication.cancelRequest()
   }
   
-  func fetchData() {
+  internal func fetchData() {
     NetworkUtils.spinner.start()
     apiCommunication.fetchWorks().subscribe({ [weak self] event in
       guard let `self` = self else { return }
