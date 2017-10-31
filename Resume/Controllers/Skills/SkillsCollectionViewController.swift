@@ -23,7 +23,7 @@ final class SkillsCollectionViewController: UIViewController {
   var viewModel: SkillsViewModel!
   
   deinit {
-    viewModel.shouldLoadData.onNext(false)
+    viewModel.shouldLoadData.onCompleted()
   }
   
   init() {

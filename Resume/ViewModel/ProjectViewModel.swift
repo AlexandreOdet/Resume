@@ -34,11 +34,13 @@ class ProjectViewModel: ViewModelProtocol {
     sortType.subscribe(onNext: {
       [unowned self] type in
       self.sort(by: type)
-    }).disposed(by: disposeBag)
+      }).disposed(by: disposeBag)
     
     shouldLoadData.subscribe(onNext: {
       [unowned self] shouldLoad in
-      (shouldLoad) ? self.fetchData() : self.cancelRequest()
+      if shouldLoad { self.fetchData() }
+      }, onCompleted: {
+        self.cancelRequest()
     }).disposed(by: disposeBag)
     
   }

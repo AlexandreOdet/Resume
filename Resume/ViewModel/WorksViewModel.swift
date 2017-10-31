@@ -23,7 +23,9 @@ class WorksViewModel: ViewModelProtocol {
   init() {
     shouldLoadData.subscribe(onNext: {
       [unowned self] shouldLoad in
-      (shouldLoad) ? self.fetchData() : self.cancelRequest()
+      if shouldLoad { self.fetchData() }
+      }, onCompleted: {
+        self.cancelRequest()
     }).disposed(by: disposeBag)
   }
   

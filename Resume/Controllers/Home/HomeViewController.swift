@@ -28,7 +28,7 @@ final class HomeViewController: UIViewController {
   var collectionView: UICollectionView!
   
   deinit {
-    viewModel.shouldLoadData.onNext(false)
+    viewModel.shouldLoadData.onCompleted()
   }
   
   override func viewDidLoad() {

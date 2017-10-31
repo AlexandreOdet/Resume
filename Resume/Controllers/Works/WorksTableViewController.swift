@@ -21,7 +21,7 @@ class WorksTableViewController: UIViewController {
   var tableView: UITableView!
   
   deinit {
-     viewModel.shouldLoadData.onNext(false)
+     viewModel.shouldLoadData.onCompleted()
   }
   
   init() {
