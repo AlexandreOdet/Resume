@@ -7,6 +7,7 @@ Pods I use to help me through development.
   - SnapKit
   - RxSwift
   - RxCocoa
+  - RxGesture
   - ObjectMapper
   - AlamofireObjectMapper
   - CircleProgressBar
