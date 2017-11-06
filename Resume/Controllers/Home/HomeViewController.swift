@@ -174,8 +174,6 @@ final class HomeViewController: UIViewController {
   }
   
   private func setUpCollectionView() {
-    viewModel.shouldLoadData.onNext(true)
-    
     let width = UIScreen.main.bounds.width
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = CGSize(width: (width / 2) - 15, height: 90)

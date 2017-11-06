@@ -16,10 +16,12 @@ final class HomeViewModel: ViewModelProtocol {
   private let disposeBag = DisposeBag()
   
   var studies: Observable<[Study]> {
+    NetworkUtils.spinner.start()
     return apiCommunication.fetchStudies().flatMapLatest({ studies -> Observable<[Study]> in
+      NetworkUtils.spinner.stop()
       return Observable.just(studies)
         .observeOn(MainScheduler.instance)
-        .catchErrorJustReturn([])
+        .filter({ !$0.isEmpty})
     })
   }
   
@@ -57,7 +59,7 @@ final class HomeViewModel: ViewModelProtocol {
   init() {
     shouldLoadData.subscribe(onNext: {
       [unowned self] shouldLoad in
-      if shouldLoad { self.fetchData() }
+      if shouldLoad { self.studies.retry() }
       }, onCompleted: {
         self.cancelRequest()
     }).disposed(by: disposeBag)

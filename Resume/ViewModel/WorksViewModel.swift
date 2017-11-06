@@ -22,7 +22,7 @@ class WorksViewModel: ViewModelProtocol {
     return apiCommunication.fetchWorks().flatMapLatest({ works -> Observable<[Work]> in
       return Observable.just(works)
       .observeOn(MainScheduler.instance)
-      .catchErrorJustReturn([])
+        .catchErrorJustReturn([]).filter({ !$0.isEmpty})
     })
   }
   

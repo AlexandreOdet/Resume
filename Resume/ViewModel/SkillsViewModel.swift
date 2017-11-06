@@ -21,6 +21,7 @@ final class SkillsViewModel: ViewModelProtocol {
     return apiCommunication.fetchSkills().flatMapLatest({ skills -> Observable<[Skill]> in
       return Observable.just(skills)
       .catchErrorJustReturn([])
+      .filter({!$0.isEmpty })
       .observeOn(MainScheduler.instance)
     })
   }
@@ -30,7 +31,7 @@ final class SkillsViewModel: ViewModelProtocol {
   init() {
     shouldLoadData.subscribe(onNext: {
       [unowned self] shouldLoad in
-      if shouldLoad { self.fetchData() }
+      if shouldLoad { self.skillsItems.retry() }
       }, onCompleted: {
         self.cancelRequest()
     }).disposed(by: disposeBag)
@@ -41,25 +42,6 @@ final class SkillsViewModel: ViewModelProtocol {
   }
   
   internal func fetchData() {
-//    NetworkUtils.spinner.start()
-//    apiCommunication.fetchSkills().subscribe( { [weak self] event in
-//      guard let `self` = self else { return }
-//      NetworkUtils.spinner.stop()
-//      switch event {
-//      case .next(let data):
-//        if data.isEmpty {
-//          self.error.onNext(ResumeError.network)
-//        } else {
-//          self.skillsItems.value.removeAll()
-//          self.skillsItems.value.append(contentsOf: data.sorted(by: { $0.name < $1.name }))
-//        }
-//      case .error(let error):
-//        self.error.onNext(error)
-//        return
-//      case .completed:
-//        return
-//      }
-//    }).disposed(by: disposeBag)
   }
   
 }
