@@ -18,10 +18,15 @@ final class HomeViewController: UIViewController {
   private let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
   private let disposeBag = DisposeBag()
   private let viewModel = HomeViewModel()
-  private let localisation = "Toulouse, FR"
   
   private let reuseIdentifier = "HomeCollectionViewCell"
   
+  let nameLabel = UILabel()
+  let localisationLabel = UILabel()
+  let ageLabel = UILabel()
+  let mailLabel = UILabel()
+  let phoneLabel = UILabel()
+
   var canSendMail: Variable<Bool> = Variable(true)
   var canMakeCall: Variable<Bool> = Variable(true)
   
@@ -73,35 +78,25 @@ final class HomeViewController: UIViewController {
     headerView.translatesAutoresizingMaskIntoConstraints = false
     headerView.backgroundColor = UIColor.white
     
-    let nameLabel = UILabel()
     headerView.addSubview(nameLabel)
     nameLabel.snp.makeConstraints { (make) -> Void in
       make.top.equalToSuperview().offset(5)
       make.leading.equalToSuperview().offset(10)
     }
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
-    nameLabel.text = "Alexandre Odet"
     nameLabel.font = UIFont.boldSystemFont(ofSize: 15)
     nameLabel.textColor = UIColor.darkGray
     
-    let ageLabel = UILabel()
     headerView.addSubview(ageLabel)
     ageLabel.snp.makeConstraints { (make) -> Void in
       make.trailing.equalToSuperview().offset(-10)
       make.top.equalTo(nameLabel)
     }
     ageLabel.translatesAutoresizingMaskIntoConstraints = false
-    
-    let now = Date()
-    let year = Calendar.current.component(.year, from: now)
-    
-    ageLabel.text = "\(year - 1993) ans"
     ageLabel.font = UIFont.boldSystemFont(ofSize: 15)
     ageLabel.textColor = UIColor.darkGray
     ageLabel.textAlignment = .center
     
-    let localisationLabel = UILabel()
-    let mailLabel = UILabel()
     
     view.addSubview(localisationLabel)
     localisationLabel.snp.makeConstraints { (make) -> Void in
@@ -109,7 +104,6 @@ final class HomeViewController: UIViewController {
       make.leading.equalTo(nameLabel)
       make.trailing.equalTo(headerView.snp.centerX).offset(-5)
     }
-    localisationLabel.text = localisation
     localisationLabel.adjustsFontSizeToFitWidth = true
     
     view.addSubview(mailLabel)
@@ -120,7 +114,6 @@ final class HomeViewController: UIViewController {
     }
     canSendMail.asObservable().bind(to: mailLabel.rx.isUserInteractionEnabled).disposed(by: disposeBag)
     
-    mailLabel.text = "odet.alexandre.93@gmail.com"
     mailLabel.adjustsFontSizeToFitWidth = true
     
     let tapGesture = UITapGestureRecognizer()
@@ -138,14 +131,12 @@ final class HomeViewController: UIViewController {
       }
     }).disposed(by: disposeBag)
     
-    let phoneLabel = UILabel()
     view.addSubview(phoneLabel)
     phoneLabel.snp.makeConstraints { (make) -> Void in
       make.top.equalTo(mailLabel.snp.bottom).offset(10)
       make.trailing.equalTo(mailLabel)
       make.leading.equalTo(mailLabel)
     }
-    phoneLabel.text = "07 87 68 69 21"
     phoneLabel.adjustsFontSizeToFitWidth = true
     
     let phoneGestureRecognizer = UITapGestureRecognizer()
@@ -158,11 +149,10 @@ final class HomeViewController: UIViewController {
         self.displayPhoneCallErrorAlert()
       }
     }).disposed(by: disposeBag)
-    canMakeCall.asObservable().bind(to: phoneLabel.rx.isUserInteractionEnabled).disposed(by: disposeBag)
-  }
-  
-  private func getDifferenceBetweenTwoYears(begin: Int, end: Int) -> Int {
-    return end - begin
+    canMakeCall.asObservable()
+      .observeOn(MainScheduler.instance)
+      .bind(to: phoneLabel.rx.isUserInteractionEnabled)
+      .disposed(by: disposeBag)
   }
   
   private func setUpNavigationBarButtons() {
@@ -253,10 +243,37 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: Bindable {
   func setUpBindings() {
+    viewModel.observableName
+      .observeOn(MainScheduler.instance)
+      .bind(to: nameLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    
+    viewModel.observableLocation
+      .observeOn(MainScheduler.instance)
+      .bind(to: localisationLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    viewModel.observableAge
+      .observeOn(MainScheduler.instance)
+      .bind(to: ageLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    viewModel.observableMail
+      .observeOn(MainScheduler.instance)
+      .bind(to: mailLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    viewModel.observablePhone
+      .observeOn(MainScheduler.instance)
+      .bind(to: phoneLabel.rx.text)
+      .disposed(by: disposeBag)
+    
     viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
       guard let `self` = self else { return }
       self.displayNetworkErrorAlert()
     }).disposed(by: disposeBag)
+    
   }
 }
 
@@ -264,7 +281,8 @@ extension HomeViewController: Alertable {
   func displayMailErrorAlert() {
     let alert = UIAlertController(title: "Oops", message: "Seems like your device can't send e-mail !", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-      _ in
+      [weak self] _ in
+      guard let `self` = self else { return }
       self.canSendMail.value = false
     }))
     present(alert, animated: true, completion: nil)
@@ -285,7 +303,8 @@ extension HomeViewController: Alertable {
   func displayPhoneCallErrorAlert() {
     let alert = UIAlertController(title: "Oops", message: "Seems like your device can't make a call !", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-      _ in
+      [weak self] _ in
+      guard let `self` = self else { return }
       self.canMakeCall.value = false
     }))
     present(alert, animated: true, completion: nil)
@@ -293,7 +312,9 @@ extension HomeViewController: Alertable {
 }
 
 extension HomeViewController: MFMailComposeViewControllerDelegate {
-  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+  func mailComposeController(_ controller: MFMailComposeViewController,
+                             didFinishWith result: MFMailComposeResult,
+                             error: Error?) {
     controller.dismiss(animated: true, completion: nil)
   }
 }

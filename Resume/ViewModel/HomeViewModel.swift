@@ -17,6 +17,28 @@ final class HomeViewModel: ViewModelProtocol {
   
   var studies = Variable<[Study]>([])
   
+  var observableName: Observable<String> {
+    return Observable.just("Alexandre Odet")
+  }
+  
+  var observableLocation: Observable<String> {
+    return Observable.just("Toulouse, FR")
+  }
+  
+  var observableAge: Observable<String> {
+    let now = Date()
+    let year = Calendar.current.component(.year, from: now)
+    return Observable.just("\(year - 1993) ans")
+  }
+  
+  var observableMail: Observable<String> {
+    return Observable.just("odet.alexandre.93@gmail.com")
+  }
+  
+  var observablePhone: Observable<String> {
+    return Observable.just("07 87 68 69 21")
+  }
+  
   var networkError: PublishSubject<Error> = PublishSubject()
   var shouldLoadData: PublishSubject<Bool> = PublishSubject()
   
