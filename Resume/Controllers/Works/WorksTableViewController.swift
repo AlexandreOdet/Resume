@@ -54,7 +54,7 @@ extension WorksTableViewController: Bindable {
       self.displayNetworkErrorAlert()
     }).disposed(by: disposeBag)
     
-    viewModel.works.asObservable()
+    viewModel.works
       .observeOn(MainScheduler.instance)
       .bind(to: tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: WorksTableViewCell.self)) {
       _, element, cell in

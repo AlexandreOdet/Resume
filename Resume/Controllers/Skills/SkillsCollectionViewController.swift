@@ -60,7 +60,7 @@ final class SkillsCollectionViewController: UIViewController {
 extension SkillsCollectionViewController: Bindable {
   func setUpBindings() {
     viewModel
-      .observableSkills
+      .skillsItems
       .observeOn(MainScheduler.instance)
       .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: SkillsCollectionViewCell.self))
       { _, element, cell in

@@ -17,15 +17,15 @@ final class SkillsViewModel: ViewModelProtocol {
   
   private let apiCommunication = WebsiteAPICommunication()
   
-  var skillsItems =  Variable<[Skill]>([])
+  var skillsItems: Observable<[Skill]> {
+    return apiCommunication.fetchSkills().flatMapLatest({ skills -> Observable<[Skill]> in
+      return Observable.just(skills)
+      .catchErrorJustReturn([])
+      .observeOn(MainScheduler.instance)
+    })
+  }
   var error: PublishSubject<Error> = PublishSubject()
   var shouldLoadData: PublishSubject<Bool> = PublishSubject()
-  
-  var observableSkills: Observable<[Skill]> {
-    return skillsItems
-      .asObservable()
-      .catchErrorJustReturn([])
-  }
 
   init() {
     shouldLoadData.subscribe(onNext: {
@@ -41,25 +41,25 @@ final class SkillsViewModel: ViewModelProtocol {
   }
   
   internal func fetchData() {
-    NetworkUtils.spinner.start()
-    apiCommunication.fetchSkills().subscribe( { [weak self] event in
-      guard let `self` = self else { return }
-      NetworkUtils.spinner.stop()
-      switch event {
-      case .next(let data):
-        if data.isEmpty {
-          self.error.onNext(ResumeError.network)
-        } else {
-          self.skillsItems.value.removeAll()
-          self.skillsItems.value.append(contentsOf: data.sorted(by: { $0.name < $1.name }))
-        }
-      case .error(let error):
-        self.error.onNext(error)
-        return
-      case .completed:
-        return
-      }
-    }).disposed(by: disposeBag)
+//    NetworkUtils.spinner.start()
+//    apiCommunication.fetchSkills().subscribe( { [weak self] event in
+//      guard let `self` = self else { return }
+//      NetworkUtils.spinner.stop()
+//      switch event {
+//      case .next(let data):
+//        if data.isEmpty {
+//          self.error.onNext(ResumeError.network)
+//        } else {
+//          self.skillsItems.value.removeAll()
+//          self.skillsItems.value.append(contentsOf: data.sorted(by: { $0.name < $1.name }))
+//        }
+//      case .error(let error):
+//        self.error.onNext(error)
+//        return
+//      case .completed:
+//        return
+//      }
+//    }).disposed(by: disposeBag)
   }
   
 }

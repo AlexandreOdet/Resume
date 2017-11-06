@@ -15,7 +15,13 @@ final class HomeViewModel: ViewModelProtocol {
   private let apiCommunication = WebsiteAPICommunication()
   private let disposeBag = DisposeBag()
   
-  var studies = Variable<[Study]>([])
+  var studies: Observable<[Study]> {
+    return apiCommunication.fetchStudies().flatMapLatest({ studies -> Observable<[Study]> in
+      return Observable.just(studies)
+        .observeOn(MainScheduler.instance)
+        .catchErrorJustReturn([])
+    })
+  }
   
   var observableName: Observable<String> {
     return Observable.just("Alexandre Odet")
@@ -68,26 +74,6 @@ final class HomeViewModel: ViewModelProtocol {
   }
   
   internal func fetchData() {
-    NetworkUtils.spinner.start()
-    apiCommunication.fetchStudies().subscribe({ [weak self] event in
-      guard let `self` = self else { return }
-      NetworkUtils.spinner.stop()
-      switch event {
-      case .next(let data):
-        if data.isEmpty {
-          self.networkError.onNext(ResumeError.network)
-        } else {
-          if !self.studies.value.isEmpty {
-            self.studies.value.removeAll()
-          }
-          self.studies.value.append(contentsOf: data)
-        }
-      case .error(let error):
-        self.networkError.onNext(error)
-      case .completed:
-        return
-      }
-    }).disposed(by: disposeBag)
   }
   
   internal func cancelRequest() {

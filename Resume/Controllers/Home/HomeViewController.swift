@@ -113,7 +113,8 @@ final class HomeViewController: UIViewController {
     mailLabel.adjustsFontSizeToFitWidth = true
     mailLabel.rx
       .tapGesture()
-    .when(.recognized)
+      .observeOn(MainScheduler.instance)
+      .when(.recognized)
       .subscribe(onNext: {
         [unowned self] _ in
         let mailViewController = MFMailComposeViewController()
@@ -136,15 +137,16 @@ final class HomeViewController: UIViewController {
     phoneLabel.adjustsFontSizeToFitWidth = true
     phoneLabel.rx
       .tapGesture()
+      .observeOn(MainScheduler.instance)
       .when(.recognized)
       .subscribe(onNext: {
-      [unowned self] _ in
-      if let url = URL(string: "tel://0787686921"), UIApplication.shared.canOpenURL(url) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-      } else {
-        self.displayPhoneCallErrorAlert()
-      }
-    }).disposed(by: disposeBag)
+        [unowned self] _ in
+        if let url = URL(string: "tel://0787686921"), UIApplication.shared.canOpenURL(url) {
+          UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+          self.displayPhoneCallErrorAlert()
+        }
+      }).disposed(by: disposeBag)
   }
   
   private func setUpNavigationBarButtons() {
@@ -194,7 +196,6 @@ final class HomeViewController: UIViewController {
     }
     
     viewModel.studies
-      .asObservable()
       .observeOn(MainScheduler.instance)
       .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: HomeCollectionViewCell.self)) {
         row, element, cell in
@@ -222,12 +223,12 @@ final class HomeViewController: UIViewController {
     jobsLabel.text = "Mes expériences professionnelles"
     jobsLabel.textAlignment = .center
     jobsLabel.rx.tapGesture()
-    .when(.recognized)
-    .subscribe(onNext: {
-      [unowned self] _ in
-      let nextViewController = WorksTableViewController()
-      self.navigationController?.pushViewController(nextViewController, animated: true)
-    }).disposed(by: disposeBag)
+      .when(.recognized)
+      .subscribe(onNext: {
+        [unowned self] _ in
+        let nextViewController = WorksTableViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+      }).disposed(by: disposeBag)
   }
 }
 
