@@ -7,6 +7,9 @@ PODS:
   - ObjectMapper (3.0.0)
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
+  - RxGesture (1.2.1):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
   - SnapKit (4.0.0)
 
@@ -16,6 +19,7 @@ DEPENDENCIES:
   - CircleProgressBar (~> 0.32)
   - ObjectMapper
   - RxCocoa
+  - RxGesture
   - RxSwift
   - SnapKit
 
@@ -25,9 +29,10 @@ SPEC CHECKSUMS:
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 68a3f989abed46fe5e07077538579f04c64dc910
+PODFILE CHECKSUM: b88555cd1791ce5c9bb707f832eaaea1faad15dc
 
 COCOAPODS: 1.3.1

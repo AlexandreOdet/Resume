@@ -39,8 +39,14 @@ final class HomeViewModel: ViewModelProtocol {
     return Observable.just("07 87 68 69 21")
   }
   
+  var canMakeCall = Variable<Bool>(true)
+  var canSendEmail = Variable<Bool>(true)
+  
+  
   var networkError: PublishSubject<Error> = PublishSubject()
   var shouldLoadData: PublishSubject<Bool> = PublishSubject()
+  var shouldUpdateCallValue: PublishSubject<Bool> = PublishSubject()
+  var shouldUpdateEmailValue: PublishSubject<Bool> = PublishSubject()
   
   init() {
     shouldLoadData.subscribe(onNext: {
@@ -48,6 +54,16 @@ final class HomeViewModel: ViewModelProtocol {
       if shouldLoad { self.fetchData() }
       }, onCompleted: {
         self.cancelRequest()
+    }).disposed(by: disposeBag)
+    
+    shouldUpdateCallValue.subscribe(onNext: {
+      [unowned self] callAvailability in
+      self.canMakeCall.value = callAvailability
+    }).disposed(by: disposeBag)
+    
+    shouldUpdateEmailValue.subscribe(onNext: {
+      [unowned self] availability in
+      self.canSendEmail.value = availability
     }).disposed(by: disposeBag)
   }
   

@@ -10,6 +10,7 @@ target 'Resume' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'AlamofireObjectMapper'
+  pod 'RxGesture'
 pod 'CircleProgressBar', '~> 0.32’
 # Pods for Resume
 

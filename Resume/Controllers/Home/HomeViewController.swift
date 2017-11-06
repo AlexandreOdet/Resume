@@ -11,6 +11,7 @@ import SnapKit
 import Alamofire
 import RxCocoa
 import RxSwift
+import RxGesture
 import MessageUI
 
 final class HomeViewController: UIViewController {
@@ -26,9 +27,6 @@ final class HomeViewController: UIViewController {
   let ageLabel = UILabel()
   let mailLabel = UILabel()
   let phoneLabel = UILabel()
-
-  var canSendMail: Variable<Bool> = Variable(true)
-  var canMakeCall: Variable<Bool> = Variable(true)
   
   var collectionView: UICollectionView!
   
@@ -43,7 +41,7 @@ final class HomeViewController: UIViewController {
     setUpBindings()
     setUpCollectionView()
   }
-
+  
   private func setUpView() {
     view.backgroundColor = UIColor.black
     
@@ -112,24 +110,22 @@ final class HomeViewController: UIViewController {
       make.trailing.equalTo(ageLabel)
       make.leading.equalTo(headerView.snp.centerX).offset(5)
     }
-    canSendMail.asObservable().bind(to: mailLabel.rx.isUserInteractionEnabled).disposed(by: disposeBag)
-    
     mailLabel.adjustsFontSizeToFitWidth = true
-    
-    let tapGesture = UITapGestureRecognizer()
-    mailLabel.addGestureRecognizer(tapGesture)
-    
-    tapGesture.rx.event.bind(onNext: { recognizer in
-      let mailViewController = MFMailComposeViewController()
-      mailViewController.setToRecipients(["odet.alexandre.93@gmail.com"])
-      mailViewController.setSubject("Contact depuis l'application Resume")
-      mailViewController.setMessageBody("", isHTML: false)
-      if MFMailComposeViewController.canSendMail() {
-        self.present(mailViewController, animated: true, completion: nil)
-      } else {
-        self.displayMailErrorAlert()
-      }
-    }).disposed(by: disposeBag)
+    mailLabel.rx
+      .tapGesture()
+    .when(.recognized)
+      .subscribe(onNext: {
+        [unowned self] _ in
+        let mailViewController = MFMailComposeViewController()
+        mailViewController.setToRecipients(["odet.alexandre.93@gmail.com"])
+        mailViewController.setSubject("Contact depuis l'application Resume")
+        mailViewController.setMessageBody("", isHTML: false)
+        if MFMailComposeViewController.canSendMail() {
+          self.present(mailViewController, animated: true, completion: nil)
+        } else {
+          self.displayMailErrorAlert()
+        }
+      }).disposed(by: disposeBag)
     
     view.addSubview(phoneLabel)
     phoneLabel.snp.makeConstraints { (make) -> Void in
@@ -138,21 +134,17 @@ final class HomeViewController: UIViewController {
       make.leading.equalTo(mailLabel)
     }
     phoneLabel.adjustsFontSizeToFitWidth = true
-    
-    let phoneGestureRecognizer = UITapGestureRecognizer()
-    phoneLabel.addGestureRecognizer(phoneGestureRecognizer)
-    
-    phoneGestureRecognizer.rx.event.bind(onNext: { _ in
+    phoneLabel.rx
+      .tapGesture()
+      .when(.recognized)
+      .subscribe(onNext: {
+      [unowned self] _ in
       if let url = URL(string: "tel://0787686921"), UIApplication.shared.canOpenURL(url) {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
       } else {
         self.displayPhoneCallErrorAlert()
       }
     }).disposed(by: disposeBag)
-    canMakeCall.asObservable()
-      .observeOn(MainScheduler.instance)
-      .bind(to: phoneLabel.rx.isUserInteractionEnabled)
-      .disposed(by: disposeBag)
   }
   
   private func setUpNavigationBarButtons() {
@@ -200,7 +192,7 @@ final class HomeViewController: UIViewController {
       make.centerX.equalToSuperview()
       make.height.equalTo(100)
     }
-
+    
     viewModel.studies
       .asObservable()
       .observeOn(MainScheduler.instance)
@@ -229,11 +221,9 @@ final class HomeViewController: UIViewController {
     }
     jobsLabel.text = "Mes expériences professionnelles"
     jobsLabel.textAlignment = .center
-    jobsLabel.isUserInteractionEnabled = true
-    
-    let tapGesture = UITapGestureRecognizer()
-    jobsLabel.addGestureRecognizer(tapGesture)
-    tapGesture.rx.event.bind(onNext: {
+    jobsLabel.rx.tapGesture()
+    .when(.recognized)
+    .subscribe(onNext: {
       [unowned self] _ in
       let nextViewController = WorksTableViewController()
       self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -269,11 +259,22 @@ extension HomeViewController: Bindable {
       .bind(to: phoneLabel.rx.text)
       .disposed(by: disposeBag)
     
+    viewModel.canMakeCall
+      .asObservable()
+      .observeOn(MainScheduler.instance)
+      .bind(to: phoneLabel.rx.isUserInteractionEnabled)
+      .disposed(by: disposeBag)
+    
+    viewModel.canSendEmail
+      .asObservable()
+      .observeOn(MainScheduler.instance)
+      .bind(to: mailLabel.rx.isUserInteractionEnabled)
+      .disposed(by: disposeBag)
+    
     viewModel.networkError.asDriver(onErrorJustReturn: ResumeError.unknown).drive(onNext: { [weak self] _ in
       guard let `self` = self else { return }
       self.displayNetworkErrorAlert()
     }).disposed(by: disposeBag)
-    
   }
 }
 
@@ -283,7 +284,7 @@ extension HomeViewController: Alertable {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
       [weak self] _ in
       guard let `self` = self else { return }
-      self.canSendMail.value = false
+      self.viewModel.shouldUpdateEmailValue.onNext(false)
     }))
     present(alert, animated: true, completion: nil)
   }
@@ -305,7 +306,7 @@ extension HomeViewController: Alertable {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
       [weak self] _ in
       guard let `self` = self else { return }
-      self.canMakeCall.value = false
+      self.viewModel.shouldUpdateCallValue.onNext(false)
     }))
     present(alert, animated: true, completion: nil)
   }
