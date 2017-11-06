@@ -17,7 +17,6 @@ final class SkillsCollectionViewController: UIViewController {
   private let reuseIdentifier = "SkillCell"
   private let disposeBag = DisposeBag()
   
-  var skills = [Skill]()
   var collectionView: UICollectionView!
   
   var viewModel: SkillsViewModel!
@@ -60,7 +59,9 @@ final class SkillsCollectionViewController: UIViewController {
 
 extension SkillsCollectionViewController: Bindable {
   func setUpBindings() {
-    viewModel.observableSkills
+    viewModel
+      .observableSkills
+      .observeOn(MainScheduler.instance)
       .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: SkillsCollectionViewCell.self))
       { _, element, cell in
         cell.set(name: element.name)

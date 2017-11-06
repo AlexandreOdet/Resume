@@ -211,7 +211,9 @@ final class HomeViewController: UIViewController {
       make.height.equalTo(100)
     }
 
-    viewModel.studies.asObservable()
+    viewModel.studies
+      .asObservable()
+      .observeOn(MainScheduler.instance)
       .bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: HomeCollectionViewCell.self)) {
         row, element, cell in
         cell.backgroundColor = .white

@@ -54,7 +54,9 @@ extension WorksTableViewController: Bindable {
       self.displayNetworkErrorAlert()
     }).disposed(by: disposeBag)
     
-    viewModel.works.asObservable().bind(to: tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: WorksTableViewCell.self)) {
+    viewModel.works.asObservable()
+      .observeOn(MainScheduler.instance)
+      .bind(to: tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: WorksTableViewCell.self)) {
       _, element, cell in
       cell.textLabel?.text = element.entreprise!
       cell.detailTextLabel?.text = element.role!
