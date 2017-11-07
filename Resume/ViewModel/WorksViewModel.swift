@@ -19,7 +19,8 @@ class WorksViewModel: ViewModelProtocol {
   var shouldLoadData: PublishSubject<Bool> = PublishSubject()
   
   var works: Observable<[Work]> {
-    return apiCommunication.fetchWorks().flatMapLatest({ works -> Observable<[Work]> in
+    return apiCommunication.fetchWorks()
+      .flatMapLatest({ works -> Observable<[Work]> in
       return Observable.just(works)
       .observeOn(MainScheduler.instance)
         .catchErrorJustReturn([]).filter({ !$0.isEmpty})

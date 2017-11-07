@@ -17,7 +17,8 @@ final class HomeViewModel: ViewModelProtocol {
   
   var studies: Observable<[Study]> {
     NetworkUtils.spinner.start()
-    return apiCommunication.fetchStudies().flatMapLatest({ studies -> Observable<[Study]> in
+    return apiCommunication.fetchStudies()
+      .flatMapLatest({ studies -> Observable<[Study]> in
       NetworkUtils.spinner.stop()
       return Observable.just(studies)
         .observeOn(MainScheduler.instance)

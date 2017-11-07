@@ -117,15 +117,21 @@ final class HomeViewController: UIViewController {
       .when(.recognized)
       .subscribe(onNext: {
         [unowned self] _ in
-        let mailViewController = MFMailComposeViewController()
-        mailViewController.setToRecipients(["odet.alexandre.93@gmail.com"])
-        mailViewController.setSubject("Contact depuis l'application Resume")
-        mailViewController.setMessageBody("", isHTML: false)
-        if MFMailComposeViewController.canSendMail() {
-          self.present(mailViewController, animated: true, completion: nil)
-        } else {
-          self.displayMailErrorAlert()
-        }
+        UIView.animate(withDuration: 0.4, animations: {
+          self.mailLabel.textColor = .lightGray
+        }, completion: { [unowned self] isFinished in
+          guard isFinished else { return }
+          self.mailLabel.textColor = .black
+          let mailViewController = MFMailComposeViewController()
+          mailViewController.setToRecipients(["odet.alexandre.93@gmail.com"])
+          mailViewController.setSubject("Contact depuis l'application Resume")
+          mailViewController.setMessageBody("", isHTML: false)
+          if MFMailComposeViewController.canSendMail() {
+            self.present(mailViewController, animated: true, completion: nil)
+          } else {
+            self.displayMailErrorAlert()
+          }
+        })
       }).disposed(by: disposeBag)
     
     view.addSubview(phoneLabel)
@@ -141,11 +147,17 @@ final class HomeViewController: UIViewController {
       .when(.recognized)
       .subscribe(onNext: {
         [unowned self] _ in
-        if let url = URL(string: "tel://0787686921"), UIApplication.shared.canOpenURL(url) {
-          UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-          self.displayPhoneCallErrorAlert()
-        }
+        UIView.animate(withDuration: 0.4, animations: {
+          self.phoneLabel.textColor = .lightGray
+        }, completion: { [unowned self] isFinished in
+          guard isFinished else { return }
+          self.phoneLabel.textColor = .black
+          if let url = URL(string: "tel://0787686921"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+          } else {
+            self.displayPhoneCallErrorAlert()
+          }
+        })
       }).disposed(by: disposeBag)
   }
   
@@ -224,8 +236,14 @@ final class HomeViewController: UIViewController {
       .when(.recognized)
       .subscribe(onNext: {
         [unowned self] _ in
-        let nextViewController = WorksTableViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        UIView.animate(withDuration: 0.4, animations: {
+          jobsLabel.textColor = .lightGray
+        }, completion: { [unowned self] isFinished in
+          guard isFinished else { return }
+          jobsLabel.textColor = .black
+          let nextViewController = WorksTableViewController()
+          self.navigationController?.pushViewController(nextViewController, animated: true)
+        })
       }).disposed(by: disposeBag)
   }
 }

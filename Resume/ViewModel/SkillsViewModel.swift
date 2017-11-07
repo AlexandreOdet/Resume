@@ -18,7 +18,8 @@ final class SkillsViewModel: ViewModelProtocol {
   private let apiCommunication = WebsiteAPICommunication()
   
   var skillsItems: Observable<[Skill]> {
-    return apiCommunication.fetchSkills().flatMapLatest({ skills -> Observable<[Skill]> in
+    return apiCommunication.fetchSkills()
+      .flatMapLatest({ skills -> Observable<[Skill]> in
       return Observable.just(skills)
       .catchErrorJustReturn([])
       .filter({!$0.isEmpty })
