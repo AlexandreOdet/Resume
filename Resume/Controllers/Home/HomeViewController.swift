@@ -233,6 +233,7 @@ final class HomeViewController: UIViewController {
     jobsLabel.text = "Mes expériences professionnelles"
     jobsLabel.textAlignment = .center
     jobsLabel.rx.tapGesture()
+      .observeOn(MainScheduler.instance)
       .when(.recognized)
       .subscribe(onNext: {
         [unowned self] _ in
@@ -333,6 +334,9 @@ extension HomeViewController: MFMailComposeViewControllerDelegate {
   func mailComposeController(_ controller: MFMailComposeViewController,
                              didFinishWith result: MFMailComposeResult,
                              error: Error?) {
+    if let err = error {
+      viewModel.networkError.onNext(err)
+    }
     controller.dismiss(animated: true, completion: nil)
   }
 }

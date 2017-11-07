@@ -32,7 +32,9 @@ final class SkillsViewModel: ViewModelProtocol {
   init() {
     shouldLoadData.subscribe(onNext: {
       [unowned self] shouldLoad in
-      if shouldLoad { self.skillsItems.retry() }
+      if shouldLoad { self.skillsItems
+        .retry()
+        .observeOn(MainScheduler.instance) }
       }, onCompleted: {
         self.cancelRequest()
     }).disposed(by: disposeBag)
